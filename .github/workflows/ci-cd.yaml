@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Cache Vendor
         id: cache-vendor
         uses: actions/cache@v3
