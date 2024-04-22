@@ -34,4 +34,7 @@ jobs:
           path: vendor
           key: ${{ runner.os }}-vendor-${{ hashFiles('**/composer.lock') }}
       - name: Test
-        run: vendor/bin/phpunit
+        uses: php-actions/phpunit@v3
+        with:
+          bootstrap: vendor/autoload.php
+          configuration: test/phpunit.xml
