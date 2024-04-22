@@ -35,8 +35,5 @@ jobs:
         with:
           path: vendor
           key: ${{ runner.os }}-vendor-${{ hashFiles('**/composer.lock') }}
-      - name: Test
-        uses: php-actions/phpunit@v3
-        with:
-          bootstrap: vendor/autoload.php
-          configuration: phpunit.xml
+      - name: Test > Unit
+        run: vendor/bin/phpunit --testsuite Unit
