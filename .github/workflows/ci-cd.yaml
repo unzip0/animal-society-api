@@ -18,7 +18,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /vendor
-          key: ${{ github.sha }}
+          key: cached-vendor
       - name: Install dependencies via composer
         run: composer install
   unit-test:
@@ -29,6 +29,6 @@ jobs:
         uses: actions/cache@v3
         with:
           path: /vendor
-          key: ${{ github.sha }}
+          key: cached-vendor
       - name: Test > Unit
         run: vendor/bin/phpunit --testsuite Unit
