@@ -14,20 +14,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-      - name: Install dependencies via composer
-        uses: php-actions/composer@v6
-      - name: Keep vendor as artifact
-        uses: actions/upload-artifact@v4
+      - name: Cache vendor folder
+        uses: actions/cache@v3
         with:
-          name: vendor
-          path: vendor
+          path: /vendor
+          key: ${{ github.sha }}
+      - name: Install dependencies via composer
+        run: composer install
   unit-test:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Get vendor
-        uses: actions/download-artifact@v4
+      - name: Retrieve cached vendor folder
+        uses: actions/cache@v3
         with:
-          name: vendor
+          path: /vendor
+          key: ${{ github.sha }}
       - name: Test > Unit
         run: vendor/bin/phpunit --testsuite Unit
