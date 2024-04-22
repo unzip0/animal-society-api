@@ -12,12 +12,22 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-      - uses: php-actions/composer@v6
-      - run: echo "Composer dependencies have been installed"
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Install dependencies via composer
+        uses: php-actions/composer@v6
+      - name: Keep vendor as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vendor
+          path: vendor
   unit-test:
     runs-on: ubuntu-latest
     steps:
-      - run: vendor/bin/phpunit --testsuite Unit
+      - name: Get vendor
+        uses: actions/download-artifact@v4
+        with:
+          name: vendor
+      - name: Passing unit tests
+        run: vendor/bin/phpunit --testsuite Unit
 
