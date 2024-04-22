@@ -17,7 +17,7 @@ jobs:
       - name: Cache vendor folder
         uses: actions/cache@v3
         with:
-          path: /vendor
+          path: ../vendor
           key: cached-vendor
       - name: Install dependencies via composer
         run: composer install
@@ -28,7 +28,7 @@ jobs:
       - name: Retrieve cached vendor folder
         uses: actions/cache@v3
         with:
-          path: /vendor
+          path: ../vendor
           key: cached-vendor
       - name: Test > Unit
         run: vendor/bin/phpunit --testsuite Unit
