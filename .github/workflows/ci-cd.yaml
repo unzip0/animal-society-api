@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+      - name: Generate project key
+        run: php artisan key:generate
       - name: Cache vendor
         id: cache-vendor
         uses: actions/cache@v3
