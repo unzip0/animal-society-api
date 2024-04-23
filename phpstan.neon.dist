@@ -4,6 +4,7 @@ includes:
 
 parameters:
     reportUnmatchedIgnoredErrors: false
+    reportMaybesInPropertyPhpDocTypes: false
     
     tmpDir: .phpstan_cache
 
