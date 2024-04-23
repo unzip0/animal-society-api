@@ -36,9 +36,9 @@ jobs:
           path: vendor
           key: ${{ runner.os }}-vendor-${{ hashFiles('**/composer.lock') }}
       - name: Code > Style
-        run: vendor/bin/ecs check
+        run: vendor/bin/ecs check --no-progress-bar
       - name: Code > analyse
-        run: vendor/bin/phpstan analyse
+        run: vendor/bin/phpstan analyse --no-progress --no-ansi
   test:
     runs-on: ubuntu-latest
     needs: build
