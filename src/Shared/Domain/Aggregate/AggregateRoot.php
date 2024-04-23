@@ -8,8 +8,14 @@ use AnimalSociety\Shared\Domain\Bus\Event\DomainEvent;
 
 abstract class AggregateRoot
 {
+    /**
+     * @var DomainEvent[]
+     */
     private array $domainEvents = [];
 
+    /**
+     * @return DomainEvent[]
+     */
     final public function pullDomainEvents(): array
     {
         $domainEvents = $this->domainEvents;
