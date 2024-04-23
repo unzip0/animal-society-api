@@ -51,3 +51,5 @@ jobs:
           key: ${{ runner.os }}-vendor-${{ hashFiles('**/composer.lock') }}
       - name: Test > Unit
         run: vendor/bin/phpunit --testsuite Unit
+      - name: Test > Feature
+        run: vendor/bin/phpunit --testsuite Feature

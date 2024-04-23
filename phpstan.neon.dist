@@ -1,0 +1,29 @@
+includes:
+    - phpstan-baseline.neon
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    reportUnmatchedIgnoredErrors: false
+    
+    tmpDir: .phpstan_cache
+
+    paths:
+        - app
+        - bootstrap
+        - config
+        - public
+        - database/seeders
+        - src
+
+    level: 7
+
+    ignoreErrors:
+        
+
+    parallel:
+        jobSize: 50
+        maximumNumberOfProcesses: 32
+        minimumNumberOfJobsPerProcess: 2
+
+rules:
+    - PHPStan\Rules\DisallowedConstructs\DisallowedEmptyRule
