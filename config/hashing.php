@@ -1,7 +1,8 @@
 <?php
 
-return [
+declare(strict_types=1);
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Hash Driver
@@ -50,5 +51,4 @@ return [
         'time' => 4,
         'verify' => true,
     ],
-
 ];
