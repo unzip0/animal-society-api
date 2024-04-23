@@ -23,8 +23,10 @@ jobs:
       - name: Install dependencies via composer
         if: steps.cache-vendor.outputs.cache-hit != 'true'
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-      - name: Generate project key
-        run: php artisan key:generate        
+      - name: Prepare laravel environment
+        run: |
+          cp pipeline/.env.pipeline .env
+          php artisan key:generate        
   code-quality:
     runs-on: ubuntu-latest
     needs: build
