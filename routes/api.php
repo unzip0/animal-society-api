@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HealthCheck\HealthCheckGetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     abort(404);
 });
+
+Route::get('/health-check', HealthCheckGetController::class);
+
