@@ -12,7 +12,9 @@ final readonly class Filter
         private FilterValue $value
     ) {}
 
-    /** @param array<string,mixed> $values*/
+    /**
+     * @param array<string,mixed> $values
+     */
     public static function fromValues(array $values): self
     {
         return new self(

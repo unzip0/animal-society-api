@@ -79,7 +79,9 @@ final readonly class DoctrineCriteriaConverter
             : $field->value();
     }
 
-    /** @return mixed[]*/
+    /**
+     * @return mixed[]
+     */
     private function formatOrder(Criteria $criteria): ?array
     {
         if (!$criteria->hasOrder()) {
