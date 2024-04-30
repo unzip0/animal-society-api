@@ -6,14 +6,18 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "beberlei/doctrineextensions": "^1.0",
         "doctrine/dbal": "^3.8",
-        "doctrine/orm": "^3.1",
+        "doctrine/orm": "^2.14",
         "guzzlehttp/guzzle": "^7.2",
         "lambdish/phunctional": "^2.1",
+        "laravel-doctrine/extensions": "^1.6",
+        "laravel-doctrine/orm": "^2.0",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "predis/predis": "^2.2"
+        "predis/predis": "^2.2",
+        "skilla/validator-cif-nif-nie": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
