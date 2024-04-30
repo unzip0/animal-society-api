@@ -12,7 +12,9 @@ use Traversable;
 /** @template-implements IteratorAggregate<mixed>*/
 abstract class Collection implements Countable, IteratorAggregate
 {
-    /** @param mixed[] $items */
+    /**
+     * @param mixed[] $items
+     */
     public function __construct(
         private readonly array $items
     ) {
@@ -31,7 +33,9 @@ abstract class Collection implements Countable, IteratorAggregate
 
     abstract protected function type(): string;
 
-    /** @return mixed[] $items */
+    /**
+     * @return mixed[] $items
+     */
     protected function items(): array
     {
         return $this->items;

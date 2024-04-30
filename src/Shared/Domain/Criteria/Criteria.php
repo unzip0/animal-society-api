@@ -23,7 +23,9 @@ final readonly class Criteria
         return !$this->order->isNone();
     }
 
-    /** @return Filter[] */
+    /**
+     * @return Filter[]
+     */
     public function plainFilters(): array
     {
         return $this->filters->filters();

@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Domain;
 
-use AnimalSociety\Shared\Domain\Criteria\Filters;
 use InvalidArgumentException;
 
 final class Assert
 {
-    /** @param mixed[] $items */
+    /**
+     * @param mixed[] $items
+     */
     public static function arrayOf(string $class, array $items): void
     {
         foreach ($items as $item) {
