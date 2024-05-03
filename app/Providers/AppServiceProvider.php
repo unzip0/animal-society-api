@@ -6,6 +6,8 @@ namespace App\Providers;
 
 use AnimalSociety\Administration\Associations\Application\create\CreateAssociationCommand;
 use AnimalSociety\Administration\Associations\Application\create\CreateAssociationCommandHandler;
+use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQuery;
+use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQueryHandler;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
 use AnimalSociety\Administration\Associations\Infrastructure\Persistence\DoctrineAdministrationAssociationRepository;
 use AnimalSociety\Shared\Domain\Bus\Command\CommandBus;
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->bootCommands();
+        $this->bootQueries();
     }
 
     private function registerSingletons(): void
@@ -54,6 +57,15 @@ class AppServiceProvider extends ServiceProvider
 
         $commandBus->register([
             CreateAssociationCommand::class => CreateAssociationCommandHandler::class,
+        ]);
+    }
+
+    private function bootQueries(): void
+    {
+        $queryBus = $this->app->make(QueryBus::class);
+
+        $queryBus->register([
+            FindAllAssociationsQuery::class => FindAllAssociationsQueryHandler::class,
         ]);
     }
 }
