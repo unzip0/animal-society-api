@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administration\Associations\AssociationsCreateController;
 use App\Http\Controllers\HealthCheck\HealthCheckGetController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,4 +20,8 @@ Route::get('/', function () {
 });
 
 Route::get('/health-check', HealthCheckGetController::class);
+
+Route::prefix('v1')->group(function () {
+    Route::post('/associations', AssociationsCreateController::class);
+});
 
