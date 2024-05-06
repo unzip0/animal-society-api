@@ -73,6 +73,9 @@ class AppServiceProvider extends ServiceProvider
         ]);
     }
 
+    /**
+     * @return array<string,string>
+     */
     private function repositories(): array
     {
         return [
