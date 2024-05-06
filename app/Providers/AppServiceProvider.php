@@ -10,6 +10,10 @@ use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssocia
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQueryHandler;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
 use AnimalSociety\Administration\Associations\Infrastructure\Persistence\DoctrineAdministrationAssociationRepository;
+use AnimalSociety\Administration\Users\Application\register\RegisterUserCommand;
+use AnimalSociety\Administration\Users\Application\register\RegisterUserCommandHandler;
+use AnimalSociety\Administration\Users\Domain\UserRepository;
+use AnimalSociety\Administration\Users\Infrastructure\Persistence\DoctrineAdministrationUserRepository;
 use AnimalSociety\Shared\Domain\Bus\Command\CommandBus;
 use AnimalSociety\Shared\Domain\Bus\Query\QueryBus;
 use AnimalSociety\Shared\Infrastructure\Bus\IlluminateCommandBus;
@@ -37,11 +41,10 @@ class AppServiceProvider extends ServiceProvider
 
     private function registerSingletons(): void
     {
-        $singletons = [
+        $singletons = array_merge([
             CommandBus::class => IlluminateCommandBus::class,
             QueryBus::class => IlluminateQueryBus::class,
-            AssociationRepository::class => DoctrineAdministrationAssociationRepository::class,
-        ];
+        ], $this->repositories());
 
         foreach ($singletons as $abstract => $concrete) {
             $this->app->singleton(
@@ -57,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
 
         $commandBus->register([
             CreateAssociationCommand::class => CreateAssociationCommandHandler::class,
+            RegisterUserCommand::class => RegisterUserCommandHandler::class,
         ]);
     }
 
@@ -67,5 +71,13 @@ class AppServiceProvider extends ServiceProvider
         $queryBus->register([
             FindAllAssociationsQuery::class => FindAllAssociationsQueryHandler::class,
         ]);
+    }
+
+    private function repositories(): array
+    {
+        return [
+            AssociationRepository::class => DoctrineAdministrationAssociationRepository::class,
+            UserRepository::class => DoctrineAdministrationUserRepository::class,
+        ];
     }
 }
