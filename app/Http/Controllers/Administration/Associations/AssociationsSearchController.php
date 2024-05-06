@@ -17,7 +17,7 @@ final class AssociationsSearchController extends ApiController
         /** @var AssociationsResponse $associationsResponse */
         $associationsResponse = $this->ask(new FindAllAssociationsQuery());
 
-        return new JsonResponse($associationsResponse->toArray());
+        return $this->response($associationsResponse->toArray());
     }
 
     /**
