@@ -7,11 +7,11 @@ namespace AnimalSociety\Administration\Associations\Application\create;
 use AnimalSociety\Administration\Associations\Application\find\AssociationFinder;
 use AnimalSociety\Administration\Associations\Domain\Association;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
+use AnimalSociety\Administration\Associations\Domain\Exception\AssociationCifAlreadyExistsException;
 use AnimalSociety\Shared\Domain\Bus\Event\EventBus;
 use AnimalSociety\Shared\Domain\Criteria\Criteria;
 use AnimalSociety\Shared\Domain\Criteria\Filters;
 use AnimalSociety\Shared\Domain\Criteria\Order;
-use RuntimeException;
 
 final readonly class AssociationCreator
 {
@@ -52,7 +52,7 @@ final readonly class AssociationCreator
         );
 
         if ($associationWithSameCif !== []) {
-            throw new RuntimeException('CIF already exists', 400);
+            throw AssociationCifAlreadyExistsException::create();
         }
 
         $this->repository->save($association);

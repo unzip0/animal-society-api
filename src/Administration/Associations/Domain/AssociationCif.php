@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Associations\Domain;
 
+use AnimalSociety\Administration\Associations\Domain\Exception\AssociationCifInvalidException;
 use AnimalSociety\Shared\Domain\ValueObject\StringValueObject;
-use InvalidArgumentException;
 use Skilla\ValidatorCifNifNie\Generator;
 use Skilla\ValidatorCifNifNie\Validator;
 
@@ -23,7 +23,7 @@ final class AssociationCif extends StringValueObject
          * @phpstan-ignore-next-line
          */
         if (!$validator->isValidCif($value)) {
-            throw new InvalidArgumentException('Invalid CIF');
+            throw AssociationCifInvalidException::create();
         }
     }
 }
