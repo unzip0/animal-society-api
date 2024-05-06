@@ -32,7 +32,7 @@ final class Association extends AggregateRoot
          */
         private readonly int $associationCityId,
         /**
-         * @ORM\Column(name="email", type="string")
+         * @ORM\Column(name="email", type="string", unique=true)
          */
         private readonly string $associationEmail,
         /**

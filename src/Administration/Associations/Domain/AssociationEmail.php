@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Associations\Domain;
 
+use AnimalSociety\Shared\Domain\Exception\InvalidEmailException;
 use AnimalSociety\Shared\Domain\ValueObject\StringValueObject;
-use Exception;
 
 final class AssociationEmail extends StringValueObject
 {
@@ -19,7 +19,7 @@ final class AssociationEmail extends StringValueObject
     private function validateEmail(string $email): void
     {
         if (!(bool) filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            throw new Exception('Invalid email');
+            throw InvalidEmailException::create();
         }
     }
 }
