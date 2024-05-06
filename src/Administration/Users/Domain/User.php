@@ -137,13 +137,21 @@ final class User extends AggregateRoot implements
         return $this->role;
     }
 
-    public function getJWTIdentifier()
+    public function getJWTIdentifier(): string
     {
         return $this->id();
     }
 
-    public function getJWTCustomClaims()
+    /**
+     * @return mixed[]
+     */
+    public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    public function isActive(): bool
+    {
+        return $this->active === true;
     }
 }
