@@ -9,6 +9,8 @@ use AnimalSociety\Shared\Domain\Bus\Command\CommandBus;
 use AnimalSociety\Shared\Domain\Bus\Query\Query;
 use AnimalSociety\Shared\Domain\Bus\Query\QueryBus;
 use AnimalSociety\Shared\Domain\Bus\Query\Response;
+use AnimalSociety\Shared\Infrastructure\Http\Illuminate\IlluminateApiResponse;
+use Illuminate\Http\JsonResponse;
 
 use function Lambdish\Phunctional\each;
 
@@ -38,5 +40,18 @@ abstract class ApiController
     protected function dispatch(Command $command): void
     {
         $this->commandBus->dispatch($command);
+    }
+
+    /**
+     * @param mixed[] $data
+     */
+    protected function response(
+        array $data,
+        ?int $httpCode = null
+    ): JsonResponse {
+        return IlluminateApiResponse::create(
+            data: $data,
+            httpCode: $httpCode,
+        );
     }
 }
