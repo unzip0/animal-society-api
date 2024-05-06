@@ -16,6 +16,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
+        "php-open-source-saver/jwt-auth": "^2.2",
         "predis/predis": "^2.2",
         "skilla/validator-cif-nif-nie": "^1.0"
     },
