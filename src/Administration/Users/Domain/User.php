@@ -154,4 +154,20 @@ final class User extends AggregateRoot implements
     {
         return $this->active === true;
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id(),
+            'name' => $this->name(),
+            'first_last_name' => $this->firstLastName(),
+            'second_last_name' => $this->secondLastName(),
+            'email' => $this->email(),
+            'association_id' => $this->associationId(),
+            'role' => $this->role(),
+        ];
+    }
 }

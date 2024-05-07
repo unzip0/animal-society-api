@@ -10,6 +10,8 @@ use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssocia
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQueryHandler;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
 use AnimalSociety\Administration\Associations\Infrastructure\Persistence\DoctrineAdministrationAssociationRepository;
+use AnimalSociety\Administration\Users\Application\login\LoginUserQuery;
+use AnimalSociety\Administration\Users\Application\login\LoginUserQueryHandler;
 use AnimalSociety\Administration\Users\Application\register\RegisterUserCommand;
 use AnimalSociety\Administration\Users\Application\register\RegisterUserCommandHandler;
 use AnimalSociety\Administration\Users\Domain\UserRepository;
@@ -61,6 +63,7 @@ class AppServiceProvider extends ServiceProvider
         $commandBus->register([
             CreateAssociationCommand::class => CreateAssociationCommandHandler::class,
             RegisterUserCommand::class => RegisterUserCommandHandler::class,
+            LoginUserQuery::class => LoginUserQueryHandler::class,
         ]);
     }
 

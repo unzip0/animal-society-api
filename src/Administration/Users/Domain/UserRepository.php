@@ -15,6 +15,11 @@ interface UserRepository
      */
     public function findAll(): array;
 
+    /**
+     * @param array<string,mixed> $criteria
+     */
+    public function findOneBy(array $criteria): ?User;
+
     public function find(UserId $id): ?User;
 
     /**
