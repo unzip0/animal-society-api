@@ -24,6 +24,14 @@ final class DoctrineAdministrationUserRepository extends DoctrineRepository impl
     }
 
     /**
+     * @param array<string,mixed> $criteria
+     */
+    public function findOneBy(array $criteria): ?User
+    {
+        return $this->repository(User::class)->findOneBy($criteria);
+    }
+
+    /**
      * @return User[]
      */
     public function findAll(): array
