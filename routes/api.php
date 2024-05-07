@@ -4,6 +4,7 @@ use App\Http\Controllers\Administration\Associations\AssociationsCreateControlle
 use App\Http\Controllers\Administration\Associations\AssociationsSearchController;
 use App\Http\Controllers\Administration\Users\UsersLoginController;
 use App\Http\Controllers\Administration\Users\UsersLogoutController;
+use App\Http\Controllers\Administration\Users\UsersProfileController;
 use App\Http\Controllers\Administration\Users\UsersRegisterController;
 use App\Http\Controllers\HealthCheck\HealthCheckGetController;
 use Illuminate\Support\Facades\Route;
@@ -26,13 +27,24 @@ Route::get('/', function () {
 Route::get('/health-check', HealthCheckGetController::class);
 
 Route::prefix('v1')->group(function () {
-    Route::post('/users/register', UsersRegisterController::class);
-    Route::post('/users/login', UsersLoginController::class)->name('login');
+    
+    Route::prefix('users')->group(function() {
+        Route::post('register', UsersRegisterController::class);
+        Route::post('login', UsersLoginController::class)->name('login');
+    });
 
     Route::middleware('auth:api')->group(function() {
-        Route::post('/associations', AssociationsCreateController::class);
-        Route::get('/associations', AssociationsSearchController::class);
-        Route::post('users/logout', UsersLogoutController::class);
+        
+        Route::prefix('associations')->group(function() {
+            Route::post('create', AssociationsCreateController::class);
+            Route::get('all', AssociationsSearchController::class);
+        });
+
+        Route::prefix('users')->group(function() {
+            Route::get('profile', UsersProfileController::class);
+            Route::post('logout', UsersLogoutController::class);
+        });
+     
     });
     
 });
