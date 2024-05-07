@@ -3,6 +3,7 @@
 use App\Http\Controllers\Administration\Associations\AssociationsCreateController;
 use App\Http\Controllers\Administration\Associations\AssociationsSearchController;
 use App\Http\Controllers\Administration\Users\UsersLoginController;
+use App\Http\Controllers\Administration\Users\UsersLogoutController;
 use App\Http\Controllers\Administration\Users\UsersRegisterController;
 use App\Http\Controllers\HealthCheck\HealthCheckGetController;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::prefix('v1')->group(function () {
     Route::middleware('auth:api')->group(function() {
         Route::post('/associations', AssociationsCreateController::class);
         Route::get('/associations', AssociationsSearchController::class);
+        Route::post('users/logout', UsersLogoutController::class);
     });
     
 });
