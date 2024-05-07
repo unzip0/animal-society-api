@@ -170,4 +170,14 @@ final class User extends AggregateRoot implements
             'role' => $this->role(),
         ];
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function profile(): array
+    {
+        return array_merge([
+            'active' => $this->isActive(),
+        ], $this->toArray());
+    }
 }
