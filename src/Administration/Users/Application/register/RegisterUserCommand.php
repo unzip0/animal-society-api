@@ -16,7 +16,7 @@ final readonly class RegisterUserCommand implements Command
         private string $email,
         private string $password,
         private string $role,
-        private string $associationId,
+        private ?string $associationId,
     ) {}
 
     public function id(): string
@@ -54,7 +54,7 @@ final readonly class RegisterUserCommand implements Command
         return $this->role;
     }
 
-    public function associationId(): string
+    public function associationId(): ?string
     {
         return $this->associationId;
     }
