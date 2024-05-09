@@ -8,10 +8,8 @@ use AnimalSociety\Administration\Associations\Application\find\AssociationFinder
 use AnimalSociety\Administration\Associations\Domain\Association;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
 use AnimalSociety\Administration\Associations\Domain\Exception\AssociationCifAlreadyExistsException;
+use AnimalSociety\Administration\Associations\Domain\Exception\AssociationEmailInvalidException;
 use AnimalSociety\Shared\Domain\Bus\Event\EventBus;
-use AnimalSociety\Shared\Domain\Criteria\Criteria;
-use AnimalSociety\Shared\Domain\Criteria\Filters;
-use AnimalSociety\Shared\Domain\Criteria\Order;
 
 final readonly class AssociationCreator
 {
@@ -36,27 +34,29 @@ final readonly class AssociationCreator
             associationEmail: $email,
         );
 
-        $associationWithSameCif = $this->associationFinder->__invoke(
-            new Criteria(
-                filters: Filters::fromValues([
-                    [
-                        'field' => 'associationCif',
-                        'operator' => '=',
-                        'value' => $association->associationCif(),
-                    ],
-                ]),
-                order: Order::fromValues(null, null),
-                offset: null,
-                limit: null
-            )
-        );
-
-        if ($associationWithSameCif !== []) {
-            throw AssociationCifAlreadyExistsException::create();
-        }
+        $this->checkAssociationConstraints($association);
 
         $this->repository->save($association);
 
         // $this->bus->publish(...$association->pullDomainEvents());
+    }
+
+    private function checkAssociationConstraints(Association $association): void
+    {
+        $associationWithSameCif = $this->associationFinder->__invoke([
+            'associationCif' => $association->associationCif(),
+        ]);
+
+        if ($associationWithSameCif instanceof Association) {
+            throw AssociationCifAlreadyExistsException::create();
+        }
+
+        $associationWithSameEmail = $this->associationFinder->__invoke([
+            'associationEmail' => $association->associationEmail(),
+        ]);
+
+        if ($associationWithSameEmail instanceof Association) {
+            throw AssociationEmailInvalidException::create();
+        }
     }
 }
