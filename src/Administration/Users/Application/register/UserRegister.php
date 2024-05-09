@@ -11,9 +11,6 @@ use AnimalSociety\Administration\Users\Domain\Exception\UserEmailAreadyUsedExcep
 use AnimalSociety\Administration\Users\Domain\User;
 use AnimalSociety\Administration\Users\Domain\UserRepository;
 use AnimalSociety\Shared\Domain\Bus\Event\EventBus;
-use AnimalSociety\Shared\Domain\Criteria\Criteria;
-use AnimalSociety\Shared\Domain\Criteria\Filters;
-use AnimalSociety\Shared\Domain\Criteria\Order;
 
 final readonly class UserRegister
 {
@@ -32,9 +29,13 @@ final readonly class UserRegister
         string $email,
         string $password,
         string $role,
-        string $associationId,
+        ?string $associationId,
     ): void {
-        $this->checkUserContraints($email, $associationId);
+        if ($associationId === null) {
+            $associationId = $this->getAssociationIdByEmail($email);
+        }
+
+        $this->checkUserConstraints($email, $associationId);
 
         $user = User::create(
             id: $id,
@@ -52,51 +53,38 @@ final readonly class UserRegister
         // $this->bus->publish(...$user->pullDomainEvents());
     }
 
-    private function checkUserContraints(
+    private function checkUserConstraints(
         string $email,
-        string $associationId,
+        ?string $associationId,
     ): void {
-        $usersWithSameEmail = $this->userFinder->__invoke(
-            new Criteria(
-                filters: Filters::fromValues([
-                    [
-                        'field' => 'email',
-                        'operator' => '=',
-                        'value' => $email,
-                    ],
-                ]),
-                order: Order::fromValues(null, null),
-                offset: null,
-                limit: null
-            )
-        );
+        $usersWithSameEmail = $this->userFinder->__invoke([
+            'email' => $email,
+        ]);
 
-        if ($usersWithSameEmail !== []) {
+        if ($usersWithSameEmail instanceof User) {
             throw UserEmailAreadyUsedException::create();
         }
 
-        $associationWithEmail = $this->associationFinder->__invoke(
-            new Criteria(
-                filters: Filters::fromValues([
-                    [
-                        'field' => 'associationEmail',
-                        'operator' => '=',
-                        'value' => $email,
-                    ],
-                    [
-                        'field' => 'associationId',
-                        'operator' => '=',
-                        'value' => $associationId,
-                    ],
-                ]),
-                order: Order::fromValues(null, null),
-                offset: null,
-                limit: null
-            )
-        );
+        $associationWithEmail = $this->associationFinder->__invoke([
+            'associationEmail' => $email,
+            'associationId' => $associationId,
+        ]);
 
-        if ($associationWithEmail === []) {
+        if ($associationWithEmail === null) {
             throw AssociationEmailInvalidException::create();
         }
+    }
+
+    private function getAssociationIdByEmail(string $email): string
+    {
+        $associationWithEmail = $this->associationFinder->__invoke([
+            'associationEmail' => $email,
+        ]);
+
+        if ($associationWithEmail === null) {
+            throw AssociationEmailInvalidException::create();
+        }
+
+        return $associationWithEmail->id();
     }
 }

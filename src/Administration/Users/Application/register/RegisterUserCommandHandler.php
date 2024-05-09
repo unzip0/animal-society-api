@@ -29,7 +29,10 @@ final readonly class RegisterUserCommandHandler implements CommandHandler
         $email = new UserEmail($command->email());
         $password = new UserPassword($command->password());
         $role = new UserRole($command->role());
-        $associationId = new UserAssociationId($command->associationId());
+
+        $associationId = $command->associationId() !== null
+            ? (new UserAssociationId($command->associationId()))->value()
+            : null;
 
         $this->creator->__invoke(
             id: $id->__toString(),
@@ -39,7 +42,7 @@ final readonly class RegisterUserCommandHandler implements CommandHandler
             email: $email->value(),
             password: $password->value(),
             role: $role->value(),
-            associationId: $associationId->value(),
+            associationId: $associationId,
         );
     }
 }

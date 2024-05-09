@@ -31,7 +31,7 @@ class UsersRegisterRequest extends Request
             'email' => 'string|required',
             'password' => 'string|required',
             'role' => 'string|required',
-            'association_id' => 'string|required',
+            'association_id' => 'string',
         ];
     }
 
@@ -70,7 +70,7 @@ class UsersRegisterRequest extends Request
         return (string) $this->input('role');
     }
 
-    public function getAssociationId(): string
+    public function getAssociationId(): ?string
     {
         return $this->input('association_id');
     }
