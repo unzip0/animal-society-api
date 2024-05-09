@@ -18,6 +18,11 @@ interface AssociationRepository
     public function find(AssociationId $id): ?Association;
 
     /**
+     * @param array<string,mixed> $criteria
+     */
+    public function findOneBy(array $criteria): ?Association;
+
+    /**
      * @return Association[]
      */
     public function matching(Criteria $criteria): array;

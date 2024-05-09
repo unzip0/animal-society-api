@@ -24,6 +24,14 @@ final class DoctrineAdministrationAssociationRepository extends DoctrineReposito
     }
 
     /**
+     * @param array<string,mixed> $criteria
+     */
+    public function findOneBy(array $criteria): ?Association
+    {
+        return $this->repository(Association::class)->findOneBy($criteria);
+    }
+
+    /**
      * @return Association[]
      */
     public function findAll(): array
