@@ -6,7 +6,6 @@ namespace AnimalSociety\Administration\Associations\Application\find;
 
 use AnimalSociety\Administration\Associations\Domain\Association;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
-use AnimalSociety\Shared\Domain\Criteria\Criteria;
 
 final readonly class AssociationFinder
 {
@@ -15,10 +14,10 @@ final readonly class AssociationFinder
     ) {}
 
     /**
-     * @return Association[]
+     * @param array<string,mixed> $criteria
      */
-    public function __invoke(Criteria $criteria): array
+    public function __invoke(array $criteria): ?Association
     {
-        return $this->repository->matching($criteria);
+        return $this->repository->findOneBy($criteria);
     }
 }
