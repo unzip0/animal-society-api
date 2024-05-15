@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AnimalSociety\Shared\Infrastructure\Bus;
+namespace AnimalSociety\Shared\Infrastructure\Bus\Query;
 
 use AnimalSociety\Shared\Domain\Bus\Query\Query;
 use AnimalSociety\Shared\Domain\Bus\Query\QueryBus;
