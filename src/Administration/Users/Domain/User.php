@@ -7,28 +7,17 @@ namespace AnimalSociety\Administration\Users\Domain;
 use AnimalSociety\Shared\Domain\Aggregate\AggregateRoot;
 use Doctrine\ORM\Mapping as ORM;
 use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\MustVerifyEmail;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Foundation\Auth\Access\Authorizable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-final class User extends AggregateRoot implements
-    JWTSubject,
-    AuthenticatableContract,
-    AuthorizableContract,
-    CanResetPasswordContract
+final class User extends AggregateRoot implements JWTSubject, AuthenticatableContract
 {
+    /** User have to be decoupled from authentication interfaces */
     use Authenticatable;
-    use Authorizable;
-    use CanResetPassword;
-    use MustVerifyEmail;
 
     public function __construct(
         /**
