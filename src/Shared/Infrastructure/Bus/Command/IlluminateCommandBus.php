@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AnimalSociety\Shared\Infrastructure\Bus;
+namespace AnimalSociety\Shared\Infrastructure\Bus\Command;
 
 use AnimalSociety\Shared\Domain\Bus\Command\Command;
 use AnimalSociety\Shared\Domain\Bus\Command\CommandBus;
