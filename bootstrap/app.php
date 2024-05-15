@@ -11,6 +11,11 @@
 |
 */
 
+use AnimalSociety\Shared\Domain\Bus\Command\CommandBus;
+use AnimalSociety\Shared\Domain\Bus\Query\QueryBus;
+use AnimalSociety\Shared\Infrastructure\Bus\Command\IlluminateCommandBus;
+use AnimalSociety\Shared\Infrastructure\Bus\Query\IlluminateQueryBus;
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
@@ -39,6 +44,16 @@ $app->singleton(
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
+);
+
+$app->singleton(
+    CommandBus::class,
+    IlluminateCommandBus::class
+);
+
+$app->singleton(
+    QueryBus::class,
+    IlluminateQueryBus::class
 );
 
 /*
