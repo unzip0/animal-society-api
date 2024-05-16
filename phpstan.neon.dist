@@ -5,6 +5,7 @@ includes:
 parameters:
     reportUnmatchedIgnoredErrors: false
     reportMaybesInPropertyPhpDocTypes: false
+    checkGenericClassInNonGenericObjectType: false
     
     tmpDir: .phpstan_cache
 
