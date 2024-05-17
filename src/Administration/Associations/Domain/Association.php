@@ -57,7 +57,11 @@ final class Association extends AggregateRoot
             associationActive: true,
         );
 
-        //record AssociationCreatedDomainEvent
+        $association->record(new AssociationCreatedDomainEvent(
+            aggregateId: $association->id(),
+            name: $association->associationName(),
+            email: $association->associationEmail(),
+        ));
 
         return $association;
     }
