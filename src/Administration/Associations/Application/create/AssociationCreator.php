@@ -16,7 +16,7 @@ final readonly class AssociationCreator
     public function __construct(
         private AssociationRepository $repository,
         private AssociationFinder $associationFinder,
-        // private EventBus $bus,
+        private EventBus $bus,
     ) {}
 
     public function __invoke(
@@ -38,7 +38,7 @@ final readonly class AssociationCreator
 
         $this->repository->save($association);
 
-        // $this->bus->publish(...$association->pullDomainEvents());
+        $this->bus->publish(...$association->pullDomainEvents());
     }
 
     private function checkAssociationConstraints(Association $association): void

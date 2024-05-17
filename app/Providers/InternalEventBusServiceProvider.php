@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use AnimalSociety\Administration\Associations\Domain\SendWelcomeEmailOnAssociationCreated;
 use AnimalSociety\Shared\Domain\Bus\Event\DomainEventSubscriber;
 use AnimalSociety\Shared\Domain\Bus\Event\EventBus;
 use AnimalSociety\Shared\Infrastructure\Bus\Event\InMemory\InMemoryLaravelEventBus;
@@ -37,6 +38,8 @@ class InternalEventBusServiceProvider extends ServiceProvider
      */
     private function subscribers(): array
     {
-        return [];
+        return [
+            SendWelcomeEmailOnAssociationCreated::class,
+        ];
     }
 }
