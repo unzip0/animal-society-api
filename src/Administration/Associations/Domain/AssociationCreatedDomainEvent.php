@@ -10,8 +10,7 @@ final class AssociationCreatedDomainEvent extends DomainEvent
 {
     public function __construct(
         string $aggregateId,
-        private readonly string $name,
-        private readonly string $email,
+        private readonly Association $association,
         string $eventId = null,
         string $occurredOn = null
     ) {
@@ -31,8 +30,7 @@ final class AssociationCreatedDomainEvent extends DomainEvent
     ): DomainEvent {
         return new self(
             $aggregateId,
-            $body['name'],
-            $body['email'],
+            $body['association'],
             $eventId,
             $occurredOn
         );
@@ -41,8 +39,13 @@ final class AssociationCreatedDomainEvent extends DomainEvent
     public function toPrimitives(): array
     {
         return [
-            'name' => $this->name,
-            'email' => $this->email,
+            'name' => $this->association->associationName(),
+            'email' => $this->association->associationEmail(),
         ];
+    }
+
+    public function association(): Association
+    {
+        return $this->association;
     }
 }
