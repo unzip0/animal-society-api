@@ -5,17 +5,30 @@ declare(strict_types=1);
 namespace AnimalSociety\Administration\Associations\Domain;
 
 use AnimalSociety\Shared\Domain\Bus\Event\DomainEventSubscriber;
-use App\Mail\TestMail;
-use Illuminate\Support\Facades\Mail;
+use AnimalSociety\Shared\Domain\Notification\Notifier\NotifierInterface;
 
 final class SendWelcomeEmailOnAssociationCreated implements DomainEventSubscriber
 {
+    public function __construct(
+        private NotifierInterface $notifier
+    ) {}
+
     public function __invoke(AssociationCreatedDomainEvent $event): void
     {
-        dd($event);
-        Mail::to('apcabrera08@gmail.com')->send(new TestMail());
+        /** @var Association $association */
+        $association = $event->association();
+        $this->notifier->notify(
+            $association,
+            new AssociationWelcomeNotification(
+                $association->associationName(),
+                $association->associationEmail()
+            ),
+        );
     }
 
+    /**
+     * @return string[]
+     */
     public static function subscribedTo(): array
     {
         return [AssociationCreatedDomainEvent::class];

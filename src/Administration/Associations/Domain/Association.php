@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace AnimalSociety\Administration\Associations\Domain;
 
 use AnimalSociety\Shared\Domain\Aggregate\AggregateRoot;
+use AnimalSociety\Shared\Domain\Notification\Notifiable\Notifiable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="associations")
  */
-final class Association extends AggregateRoot
+final class Association extends AggregateRoot implements Notifiable
 {
     public function __construct(
         /**
@@ -59,8 +60,7 @@ final class Association extends AggregateRoot
 
         $association->record(new AssociationCreatedDomainEvent(
             aggregateId: $association->id(),
-            name: $association->associationName(),
-            email: $association->associationEmail(),
+            association: $association,
         ));
 
         return $association;
@@ -94,5 +94,15 @@ final class Association extends AggregateRoot
     public function isActive(): bool
     {
         return $this->associationActive === true;
+    }
+
+    public function getNotificationChannels(): array
+    {
+        return [Notifiable::EMAIL_CHANNEL];
+    }
+
+    public function routeNotificationFor(string $channel): string
+    {
+        return $this->associationEmail;
     }
 }
