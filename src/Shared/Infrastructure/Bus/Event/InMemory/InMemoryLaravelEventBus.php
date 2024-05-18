@@ -6,14 +6,16 @@ namespace AnimalSociety\Shared\Infrastructure\Bus\Event\InMemory;
 
 use AnimalSociety\Shared\Domain\Bus\Event\DomainEvent;
 use AnimalSociety\Shared\Domain\Bus\Event\EventBus;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Collection;
 
 class InMemoryLaravelEventBus implements EventBus
 {
     protected Collection $subscribers;
 
-    public function __construct()
-    {
+    public function __construct(
+        protected Container $container
+    ) {
         $this->subscribers = new Collection();
     }
 
@@ -32,7 +34,7 @@ class InMemoryLaravelEventBus implements EventBus
     {
         foreach ($events as $event) {
             foreach ($this->subscribers[$event::class] ?? [] as $subscriber) {
-                (new $subscriber())->__invoke($event); //@phpstan-ignore-line
+                $this->container->make($subscriber)->__invoke($event);
             }
         }
     }

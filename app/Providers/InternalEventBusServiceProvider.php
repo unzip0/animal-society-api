@@ -8,14 +8,15 @@ use AnimalSociety\Administration\Associations\Domain\SendWelcomeEmailOnAssociati
 use AnimalSociety\Shared\Domain\Bus\Event\DomainEventSubscriber;
 use AnimalSociety\Shared\Domain\Bus\Event\EventBus;
 use AnimalSociety\Shared\Infrastructure\Bus\Event\InMemory\InMemoryLaravelEventBus;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
 
 class InternalEventBusServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->app->singleton(EventBus::class, function () {
-            return new InMemoryLaravelEventBus();
+        $this->app->singleton(EventBus::class, function (Container $app) {
+            return new InMemoryLaravelEventBus($app);
         });
     }
 
@@ -26,7 +27,7 @@ class InternalEventBusServiceProvider extends ServiceProvider
 
         array_map(function (string $subscriberClassName) use ($eventBus): void {
             /** @var DomainEventSubscriber $subscriber */
-            $subscriber = new $subscriberClassName();
+            $subscriber = $this->app->make($subscriberClassName);
             array_map(function (string $eventClassName) use ($eventBus, $subscriberClassName): void {
                 $eventBus->subscribe($eventClassName, $subscriberClassName);
             }, $subscriber::subscribedTo());
