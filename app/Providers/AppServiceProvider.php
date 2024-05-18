@@ -17,6 +17,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(CommandBusServiceProvider::class);
         $this->app->register(QueryBusServiceProvider::class);
         $this->app->register(InternalEventBusServiceProvider::class);
+        $this->app->register(NotificationServiceProvider::class);
     }
 
     /**
