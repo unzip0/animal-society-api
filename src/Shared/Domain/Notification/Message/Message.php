@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Domain\Notification\Message;
 
-final readonly class Message
+final class Message
 {
     public function __construct(
         protected string $subject,
