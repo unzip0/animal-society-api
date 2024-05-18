@@ -6,6 +6,8 @@ namespace AnimalSociety\Shared\Domain\Notification\Notifiable;
 
 interface Notifiable
 {
+    public const string EMAIL_CHANNEL = 'email';
+
     /**
      * @return string[]
      */

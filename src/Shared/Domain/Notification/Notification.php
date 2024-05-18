@@ -8,7 +8,7 @@ abstract class Notification
 {
     abstract public function getSubject(): string;
 
-    abstract public function getBody(): string;
+    abstract public function getBody(): ?string;
 
     abstract public function template(): string;
 
