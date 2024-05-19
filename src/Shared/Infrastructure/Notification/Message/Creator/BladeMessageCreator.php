@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace AnimalSociety\Shared\Domain\Notification\Message\Creator;
+namespace AnimalSociety\Shared\Infrastructure\Notification\Creator;
 
+use AnimalSociety\Shared\Domain\Notification\Message\Creator\MessageCreator;
 use AnimalSociety\Shared\Domain\Notification\Message\Message;
 use AnimalSociety\Shared\Domain\Notification\Notification;
 use Illuminate\Support\Facades\View;
