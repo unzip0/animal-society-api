@@ -4,6 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\CommandBusServiceProvider;
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\InternalEventBusServiceProvider;
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\NotificationServiceProvider;
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\QueryBusServiceProvider;
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\RepositoryServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

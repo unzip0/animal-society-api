@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\NotificationServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -169,6 +170,7 @@ return [
         LaravelDoctrine\ORM\DoctrineServiceProvider::class,
         LaravelDoctrine\Extensions\GedmoExtensionsServiceProvider::class,
         LaravelDoctrine\Extensions\BeberleiExtensionsServiceProvider::class,
+        NotificationServiceProvider::class,
     ])->toArray(),
 
     /*
