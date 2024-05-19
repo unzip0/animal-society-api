@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
-use AnimalSociety\Shared\Domain\Notification\Message\Creator\BladeMessageCreator;
 use AnimalSociety\Shared\Domain\Notification\Message\Creator\MessageCreator;
 use AnimalSociety\Shared\Domain\Notification\Notifier\Notifier;
 use AnimalSociety\Shared\Domain\Notification\Notifier\NotifierInterface;
+use AnimalSociety\Shared\Infrastructure\Notification\Creator\BladeMessageCreator;
 use AnimalSociety\Shared\Infrastructure\Notification\Sender\EmailSender;
 use Illuminate\Support\ServiceProvider;
 use Symfony\Component\Mailer\Mailer;
