@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Providers;
+namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
 use AnimalSociety\Shared\Domain\Notification\Message\Creator\BladeMessageCreator;
 use AnimalSociety\Shared\Domain\Notification\Message\Creator\MessageCreator;

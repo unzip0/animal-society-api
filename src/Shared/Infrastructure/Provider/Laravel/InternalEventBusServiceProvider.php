@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Providers;
+namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
 use AnimalSociety\Administration\Associations\Domain\SendWelcomeEmailOnAssociationCreated;
 use AnimalSociety\Shared\Domain\Bus\Event\DomainEventSubscriber;

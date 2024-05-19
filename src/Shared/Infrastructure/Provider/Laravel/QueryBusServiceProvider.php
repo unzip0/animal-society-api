@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Providers;
+namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQuery;
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQueryHandler;
