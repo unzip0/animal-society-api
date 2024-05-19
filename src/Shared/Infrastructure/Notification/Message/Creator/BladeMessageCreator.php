@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AnimalSociety\Shared\Infrastructure\Notification\Creator;
+namespace AnimalSociety\Shared\Infrastructure\Notification\Message\Creator;
 
 use AnimalSociety\Shared\Domain\Notification\Message\Creator\MessageCreator;
 use AnimalSociety\Shared\Domain\Notification\Message\Message;
