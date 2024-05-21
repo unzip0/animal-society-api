@@ -6,6 +6,7 @@ use App\Http\Controllers\Administration\Users\UsersLoginController;
 use App\Http\Controllers\Administration\Users\UsersLogoutController;
 use App\Http\Controllers\Administration\Users\UsersProfileController;
 use App\Http\Controllers\Administration\Users\UsersRegisterController;
+use App\Http\Controllers\Administration\Users\UsersUpdateController;
 use App\Http\Controllers\HealthCheck\HealthCheckGetController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,7 @@ Route::prefix('v1')->group(function () {
         Route::prefix('users')->group(function() {
             Route::get('profile', UsersProfileController::class);
             Route::post('logout', UsersLogoutController::class);
+            Route::patch('{id}', UsersUpdateController::class);
         });
      
     });

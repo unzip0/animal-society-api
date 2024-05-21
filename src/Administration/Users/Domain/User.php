@@ -28,23 +28,23 @@ final class User extends AggregateRoot implements JWTSubject, AuthenticatableCon
         /**
          * @ORM\Column(name="name", type="string",)
          */
-        private readonly string $name,
+        private string $name,
         /**
          * @ORM\Column(name="first_last_name", type="string",)
          */
-        private readonly string $firstLastName,
+        private string $firstLastName,
         /**
          * @ORM\Column(name="second_last_name", type="string",)
          */
-        private readonly string $secondLastName,
+        private string $secondLastName,
         /**
          * @ORM\Column(name="email", type="string", unique=true)
          */
-        private readonly string $email,
+        private string $email,
         /**
          * @ORM\Column(name="password", type="string",)
          */
-        private readonly string $password,
+        private string $password,
         /**
          * @ORM\Column(name="association_id", type="string")
          */
@@ -56,7 +56,7 @@ final class User extends AggregateRoot implements JWTSubject, AuthenticatableCon
         /**
          * @ORM\Column(name="active", type="boolean")
          */
-        private readonly bool $active,
+        private bool $active,
     ) {}
 
     public static function create(
@@ -144,6 +144,36 @@ final class User extends AggregateRoot implements JWTSubject, AuthenticatableCon
         return $this->active === true;
     }
 
+    public function updateEmail(string $email): void
+    {
+        $this->email = $email;
+    }
+
+    public function updatePassword(string $password): void
+    {
+        $this->password = $password;
+    }
+
+    public function updateName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+    public function updateFirstLastName(string $firstLastName): void
+    {
+        $this->firstLastName = $firstLastName;
+    }
+
+    public function updateSecondLastName(string $secondLastName): void
+    {
+        $this->secondLastName = $secondLastName;
+    }
+
+    public function updateActive(bool $active): void
+    {
+        $this->active = $active;
+    }
+
     /**
      * @return array<string,mixed>
      */
@@ -157,6 +187,7 @@ final class User extends AggregateRoot implements JWTSubject, AuthenticatableCon
             'email' => $this->email(),
             'association_id' => $this->associationId(),
             'role' => $this->role(),
+            'active' => $this->isActive(),
         ];
     }
 

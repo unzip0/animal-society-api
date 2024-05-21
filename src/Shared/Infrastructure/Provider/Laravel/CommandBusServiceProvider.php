@@ -8,6 +8,8 @@ use AnimalSociety\Administration\Associations\Application\create\CreateAssociati
 use AnimalSociety\Administration\Associations\Application\create\CreateAssociationCommandHandler;
 use AnimalSociety\Administration\Users\Application\register\RegisterUserCommand;
 use AnimalSociety\Administration\Users\Application\register\RegisterUserCommandHandler;
+use AnimalSociety\Administration\Users\Application\update\UpdateUserCommand;
+use AnimalSociety\Administration\Users\Application\update\UpdateUserCommandHandler;
 use AnimalSociety\Shared\Domain\Bus\Command\CommandBus;
 use Illuminate\Support\ServiceProvider;
 
@@ -27,6 +29,7 @@ class CommandBusServiceProvider extends ServiceProvider
         return [
             CreateAssociationCommand::class => CreateAssociationCommandHandler::class,
             RegisterUserCommand::class => RegisterUserCommandHandler::class,
+            UpdateUserCommand::class => UpdateUserCommandHandler::class,
         ];
     }
 }
