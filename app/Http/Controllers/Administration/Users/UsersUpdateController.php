@@ -22,7 +22,7 @@ final class UsersUpdateController extends ApiController
             )
         );
 
-        return new Response('', Response::HTTP_CREATED);
+        return new Response('', Response::HTTP_OK);
     }
 
     /**
