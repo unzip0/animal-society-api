@@ -24,5 +24,5 @@ interface UserRepository
 
     public function findById(UserId $id): ?Domain;
 
-    public function updateUser(User $user);
+    public function updateUser(User $user): void;
 }
