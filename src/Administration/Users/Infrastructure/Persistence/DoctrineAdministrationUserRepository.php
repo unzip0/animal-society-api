@@ -7,8 +7,7 @@ namespace AnimalSociety\Administration\Users\Infrastructure\Persistence;
 use AnimalSociety\Administration\Users\Domain\User;
 use AnimalSociety\Administration\Users\Domain\UserId;
 use AnimalSociety\Administration\Users\Domain\UserRepository;
-use AnimalSociety\Shared\Domain\Criteria\Criteria;
-use AnimalSociety\Shared\Infrastructure\Database\Doctrine\DoctrineCriteriaConverter;
+use AnimalSociety\Shared\Domain\Mapper\Domain;
 use AnimalSociety\Shared\Infrastructure\Database\Doctrine\DoctrineRepository;
 
 final class DoctrineAdministrationUserRepository extends DoctrineRepository implements UserRepository
@@ -18,7 +17,13 @@ final class DoctrineAdministrationUserRepository extends DoctrineRepository impl
         $this->persist($user);
     }
 
-    public function find(UserId $id): ?User
+    public function create(User $user): void
+    {
+        /** @var User $user */
+        $this->persist($user);
+    }
+
+    public function findById(UserId $id): ?Domain
     {
         return $this->repository(User::class)->find($id);
     }
@@ -39,13 +44,18 @@ final class DoctrineAdministrationUserRepository extends DoctrineRepository impl
         return $this->repository(User::class)->findAll();
     }
 
-    /**
-     * @return User[]
-     */
-    public function matching(Criteria $criteria): array
+    public function updateUser(User $user): void
     {
-        $doctrineCriteria = DoctrineCriteriaConverter::convert($criteria);
-
-        return $this->repository(User::class)->matching($doctrineCriteria)->toArray();
+        $this->persist($user);
     }
+
+    // /**
+    //  * @return User[]
+    //  */
+    // public function matching(Criteria $criteria): array
+    // {
+    //     $doctrineCriteria = DoctrineCriteriaConverter::convert($criteria);
+
+    //     return $this->repository(User::class)->matching($doctrineCriteria)->toArray();
+    // }
 }

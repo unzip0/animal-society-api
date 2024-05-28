@@ -18,7 +18,13 @@ final class DoctrineAdministrationAssociationRepository extends DoctrineReposito
         $this->persist($association);
     }
 
-    public function find(AssociationId $id): ?Association
+    public function create(Association $association): void
+    {
+        /** @var Association $association */
+        $this->persist($association);
+    }
+
+    public function findById(AssociationId $id): ?Association
     {
         return $this->repository(Association::class)->find($id);
     }

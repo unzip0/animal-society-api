@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AnimalSociety\Administration\Users\Application\register;
 
 use AnimalSociety\Administration\Associations\Application\find\AssociationFinder;
+use AnimalSociety\Administration\Associations\Domain\Association;
 use AnimalSociety\Administration\Associations\Domain\Exception\AssociationEmailInvalidException;
 use AnimalSociety\Administration\Users\Application\find\UserFinder;
 use AnimalSociety\Administration\Users\Domain\Exception\UserEmailAreadyUsedException;
@@ -48,7 +49,7 @@ final readonly class UserRegister
             role: $role,
         );
 
-        $this->repository->save($user);
+        $this->repository->create($user);
 
         // $this->bus->publish(...$user->pullDomainEvents());
     }
@@ -66,8 +67,8 @@ final readonly class UserRegister
         }
 
         $associationWithEmail = $this->associationFinder->__invoke([
-            'associationEmail' => $email,
-            'associationId' => $associationId,
+            'email' => $email,
+            'id' => $associationId,
         ]);
 
         if ($associationWithEmail === null) {
@@ -77,8 +78,9 @@ final readonly class UserRegister
 
     private function getAssociationIdByEmail(string $email): string
     {
+        /** @var Association|null $associationWithEmail */
         $associationWithEmail = $this->associationFinder->__invoke([
-            'associationEmail' => $email,
+            'email' => $email,
         ]);
 
         if ($associationWithEmail === null) {

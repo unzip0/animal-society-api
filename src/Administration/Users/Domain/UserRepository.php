@@ -4,26 +4,25 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Users\Domain;
 
-use AnimalSociety\Shared\Domain\Criteria\Criteria;
+use AnimalSociety\Shared\Domain\Mapper\Domain;
 
 interface UserRepository
 {
     public function save(User $user): void;
 
+    public function create(User $user): void;
+
     /**
-     * @return User[]
+     * @return Domain[]
      */
     public function findAll(): array;
 
     /**
      * @param array<string,mixed> $criteria
      */
-    public function findOneBy(array $criteria): ?User;
+    public function findOneBy(array $criteria): ?Domain;
 
-    public function find(UserId $id): ?User;
+    public function findById(UserId $id): ?Domain;
 
-    /**
-     * @return User[]
-     */
-    public function matching(Criteria $criteria): array;
+    public function updateUser(User $user);
 }

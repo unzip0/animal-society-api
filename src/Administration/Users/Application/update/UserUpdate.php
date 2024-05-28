@@ -25,7 +25,7 @@ final readonly class UserUpdate
         UserFirstLastName $firstLastName,
         UserSecondLastName $secondLastName,
     ): void {
-        $user = $this->repository->find($id);
+        $user = $this->repository->findById($id);
         if (!$user instanceof User) {
             throw UserNotFoundException::create();
         }
@@ -38,6 +38,6 @@ final readonly class UserUpdate
         $user->updateFirstLastName($firstLastName->value());
         $user->updateSecondLastName($secondLastName->value());
 
-        $this->repository->save($user);
+        $this->repository->updateUser($user);
     }
 }

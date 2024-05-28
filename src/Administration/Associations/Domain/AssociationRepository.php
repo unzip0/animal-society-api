@@ -4,26 +4,23 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Associations\Domain;
 
-use AnimalSociety\Shared\Domain\Criteria\Criteria;
+use AnimalSociety\Shared\Domain\Mapper\Domain;
 
 interface AssociationRepository
 {
     public function save(Association $association): void;
 
+    public function create(Association $association): void;
+
     /**
-     * @return Association[]
+     * @return Domain[]
      */
     public function findAll(): array;
 
-    public function find(AssociationId $id): ?Association;
+    public function findById(AssociationId $id): ?Domain;
 
     /**
      * @param array<string,mixed> $criteria
      */
-    public function findOneBy(array $criteria): ?Association;
-
-    /**
-     * @return Association[]
-     */
-    public function matching(Criteria $criteria): array;
+    public function findOneBy(array $criteria): ?Domain;
 }

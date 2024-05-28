@@ -5,57 +5,19 @@ declare(strict_types=1);
 namespace AnimalSociety\Administration\Users\Domain;
 
 use AnimalSociety\Shared\Domain\Aggregate\AggregateRoot;
-use Doctrine\ORM\Mapping as ORM;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use AnimalSociety\Shared\Domain\Mapper\Domain;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="users")
- */
-final class User extends AggregateRoot implements JWTSubject, AuthenticatableContract
+final class User extends AggregateRoot implements Domain
 {
-    /** User have to be decoupled from authentication interfaces */
-    use Authenticatable;
-
     public function __construct(
-        /**
-         * @ORM\Id
-         * @ORM\Column(name="id", type="string")
-         */
         private readonly string $id,
-        /**
-         * @ORM\Column(name="name", type="string",)
-         */
         private string $name,
-        /**
-         * @ORM\Column(name="first_last_name", type="string",)
-         */
         private string $firstLastName,
-        /**
-         * @ORM\Column(name="second_last_name", type="string",)
-         */
         private string $secondLastName,
-        /**
-         * @ORM\Column(name="email", type="string", unique=true)
-         */
         private string $email,
-        /**
-         * @ORM\Column(name="password", type="string",)
-         */
         private string $password,
-        /**
-         * @ORM\Column(name="association_id", type="string")
-         */
         private readonly string $associationId,
-        /**
-         * @ORM\Column(name="role", type="string",)
-         */
         private readonly string $role,
-        /**
-         * @ORM\Column(name="active", type="boolean")
-         */
         private bool $active,
     ) {}
 
@@ -126,19 +88,6 @@ final class User extends AggregateRoot implements JWTSubject, AuthenticatableCon
         return $this->role;
     }
 
-    public function getJWTIdentifier(): string
-    {
-        return $this->id();
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function getJWTCustomClaims(): array
-    {
-        return [];
-    }
-
     public function isActive(): bool
     {
         return $this->active === true;
@@ -189,6 +138,16 @@ final class User extends AggregateRoot implements JWTSubject, AuthenticatableCon
             'role' => $this->role(),
             'active' => $this->isActive(),
         ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function transform(): array
+    {
+        return array_merge([
+            'password' => $this->password(),
+        ], $this->toArray());
     }
 
     /**
