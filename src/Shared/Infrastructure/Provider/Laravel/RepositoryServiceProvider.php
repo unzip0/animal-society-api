@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
-use AnimalSociety\Administration\Associations\Infrastructure\Persistence\DoctrineAdministrationAssociationRepository;
+use AnimalSociety\Administration\Associations\Infrastructure\Persistence\EloquentAdministrationAssociationRepository;
 use AnimalSociety\Administration\Users\Domain\UserRepository;
-use AnimalSociety\Administration\Users\Infrastructure\Persistence\DoctrineAdministrationUserRepository;
+use AnimalSociety\Administration\Users\Infrastructure\Persistence\EloquentAdministrationUserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -36,8 +36,8 @@ class RepositoryServiceProvider extends ServiceProvider
     private function repositories(): array
     {
         return [
-            AssociationRepository::class => DoctrineAdministrationAssociationRepository::class,
-            UserRepository::class => DoctrineAdministrationUserRepository::class,
+            AssociationRepository::class => EloquentAdministrationAssociationRepository::class,
+            UserRepository::class => EloquentAdministrationUserRepository::class,
         ];
     }
 }
