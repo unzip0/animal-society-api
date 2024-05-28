@@ -36,7 +36,7 @@ final readonly class AssociationCreator
 
         $this->checkAssociationConstraints($association);
 
-        $this->repository->save($association);
+        $this->repository->create($association);
 
         $this->bus->publish(...$association->pullDomainEvents());
     }
@@ -44,7 +44,7 @@ final readonly class AssociationCreator
     private function checkAssociationConstraints(Association $association): void
     {
         $associationWithSameCif = $this->associationFinder->__invoke([
-            'associationCif' => $association->associationCif(),
+            'cif' => $association->associationCif(),
         ]);
 
         if ($associationWithSameCif instanceof Association) {
@@ -52,7 +52,7 @@ final readonly class AssociationCreator
         }
 
         $associationWithSameEmail = $this->associationFinder->__invoke([
-            'associationEmail' => $association->associationEmail(),
+            'email' => $association->associationEmail(),
         ]);
 
         if ($associationWithSameEmail instanceof Association) {

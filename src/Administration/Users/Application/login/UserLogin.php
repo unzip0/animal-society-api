@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AnimalSociety\Administration\Users\Application\login;
 
 use AnimalSociety\Administration\Users\Application\UserLoginResponse;
+use AnimalSociety\Administration\Users\Domain\User;
 use AnimalSociety\Administration\Users\Domain\UserRepository;
 use AnimalSociety\Shared\Domain\Exception\Auth\UserInvalidCredentialsException;
 use AnimalSociety\Shared\Domain\Exception\Auth\UserStatusException;
@@ -31,6 +32,7 @@ final readonly class UserLogin
             throw UserInvalidCredentialsException::create();
         }
 
+        /** @var User $user */
         $user = $this->repository->findOneBy([
             'email' => $email,
         ]);

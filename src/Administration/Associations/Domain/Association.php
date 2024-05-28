@@ -5,40 +5,17 @@ declare(strict_types=1);
 namespace AnimalSociety\Administration\Associations\Domain;
 
 use AnimalSociety\Shared\Domain\Aggregate\AggregateRoot;
+use AnimalSociety\Shared\Domain\Mapper\Domain;
 use AnimalSociety\Shared\Domain\Notification\Notifiable\Notifiable;
-use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- * @ORM\Table(name="associations")
- */
-final class Association extends AggregateRoot implements Notifiable
+final class Association extends AggregateRoot implements Notifiable, Domain
 {
     public function __construct(
-        /**
-         * @ORM\Id
-         * @ORM\Column(name="id", type="string")
-         */
         private readonly string $associationId,
-        /**
-         * @ORM\Column(name="cif", type="string", unique=true)
-         */
         private readonly string $associationCif,
-        /**
-         * @ORM\Column(name="name", type="string",)
-         */
         private readonly string $associationName,
-        /**
-         * @ORM\Column(name="city_id", type="integer")
-         */
         private readonly int $associationCityId,
-        /**
-         * @ORM\Column(name="email", type="string", unique=true)
-         */
         private readonly string $associationEmail,
-        /**
-         * @ORM\Column(name="active", type="boolean")
-         */
         private readonly bool $associationActive,
     ) {}
 
@@ -104,5 +81,28 @@ final class Association extends AggregateRoot implements Notifiable
     public function routeNotificationFor(string $channel): string
     {
         return $this->associationEmail;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'id' => $this->id(),
+            'cif' => $this->associationCif(),
+            'name' => $this->associationName(),
+            'city_id' => $this->associationCityId(),
+            'email' => $this->associationEmail(),
+            'active' => $this->isActive(),
+        ];
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function transform(): array
+    {
+        return $this->toArray();
     }
 }

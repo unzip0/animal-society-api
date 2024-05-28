@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Associations\Application\find;
 
-use AnimalSociety\Administration\Associations\Domain\Association;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
+use AnimalSociety\Shared\Domain\Mapper\Domain;
 
 final readonly class AssociationFinder
 {
@@ -16,7 +16,7 @@ final readonly class AssociationFinder
     /**
      * @param array<string,mixed> $criteria
      */
-    public function __invoke(array $criteria): ?Association
+    public function __invoke(array $criteria): ?Domain
     {
         return $this->repository->findOneBy($criteria);
     }

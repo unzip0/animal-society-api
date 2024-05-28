@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Users\Application\find;
 
-use AnimalSociety\Administration\Users\Domain\User;
 use AnimalSociety\Administration\Users\Domain\UserRepository;
+use AnimalSociety\Shared\Domain\Mapper\Domain;
 
 final readonly class UserFinder
 {
@@ -16,7 +16,7 @@ final readonly class UserFinder
     /**
      * @param array<string,mixed> $criteria
      */
-    public function __invoke(array $criteria): ?User
+    public function __invoke(array $criteria): ?Domain
     {
         return $this->repository->findOneBy($criteria);
     }
