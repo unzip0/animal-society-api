@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use AnimalSociety\Administration\Users\Domain\User;
+use AnimalSociety\Shared\Infrastructure\Database\Eloquent\Models\User;
 
 return [
     /*
@@ -67,15 +67,15 @@ return [
     */
 
     'providers' => [
+        // 'users' => [
+        //     'driver' => 'doctrine',
+        //     'model' => User::class,
+        // ],
+
         'users' => [
-            'driver' => 'doctrine',
+            'driver' => 'eloquent',
             'model' => User::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*
