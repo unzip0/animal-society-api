@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('role');
             $table->boolean('active');
             $table->timestamps();
+
+            $table->foreign('association_id')->references('id')->on('associations');
         });
     }
 
