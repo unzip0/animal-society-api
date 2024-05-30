@@ -35,11 +35,11 @@ final class AssociationMapper extends ModelDomainMapper
         $active = $model->isActive();
 
         $domain = new DomainAssociation(
-            associationId: $id->value(),
-            associationCif: $cif->value(),
-            associationName: $name->value(),
-            associationCityId: $cityId->value(),
-            associationEmail: $email->value(),
+            associationId: $id,
+            associationCif: $cif,
+            associationName: $name,
+            associationCityId: $cityId,
+            associationEmail: $email,
             associationActive: $active,
         );
 

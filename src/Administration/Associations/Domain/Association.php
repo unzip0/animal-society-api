@@ -11,20 +11,20 @@ use AnimalSociety\Shared\Domain\Notification\Notifiable\Notifiable;
 final class Association extends AggregateRoot implements Notifiable, Domain
 {
     public function __construct(
-        private readonly string $associationId,
-        private readonly string $associationCif,
-        private readonly string $associationName,
-        private readonly int $associationCityId,
-        private readonly string $associationEmail,
+        private readonly AssociationId $associationId,
+        private readonly AssociationCif $associationCif,
+        private readonly AssociationName $associationName,
+        private readonly AssociationCityId $associationCityId,
+        private readonly AssociationEmail $associationEmail,
         private readonly bool $associationActive,
     ) {}
 
     public static function create(
-        string $associationId,
-        string $associationCif,
-        string $associationName,
-        int $associationCityId,
-        string $associationEmail,
+        AssociationId $associationId,
+        AssociationCif $associationCif,
+        AssociationName $associationName,
+        AssociationCityId $associationCityId,
+        AssociationEmail $associationEmail,
     ): self {
         $association = new self(
             associationId: $associationId,
@@ -36,34 +36,34 @@ final class Association extends AggregateRoot implements Notifiable, Domain
         );
 
         $association->record(new AssociationCreatedDomainEvent(
-            aggregateId: $association->id(),
+            aggregateId: $association->id()->__toString(),
             association: $association,
         ));
 
         return $association;
     }
 
-    public function id(): string
+    public function id(): AssociationId
     {
         return $this->associationId;
     }
 
-    public function associationCif(): string
+    public function associationCif(): AssociationCif
     {
         return $this->associationCif;
     }
 
-    public function associationName(): string
+    public function associationName(): AssociationName
     {
         return $this->associationName;
     }
 
-    public function associationCityId(): int
+    public function associationCityId(): AssociationCityId
     {
         return $this->associationCityId;
     }
 
-    public function associationEmail(): string
+    public function associationEmail(): AssociationEmail
     {
         return $this->associationEmail;
     }
@@ -80,7 +80,7 @@ final class Association extends AggregateRoot implements Notifiable, Domain
 
     public function routeNotificationFor(string $channel): string
     {
-        return $this->associationEmail;
+        return $this->associationEmail->value();
     }
 
     /**
@@ -89,11 +89,11 @@ final class Association extends AggregateRoot implements Notifiable, Domain
     public function toArray(): array
     {
         return [
-            'id' => $this->id(),
-            'cif' => $this->associationCif(),
-            'name' => $this->associationName(),
-            'city_id' => $this->associationCityId(),
-            'email' => $this->associationEmail(),
+            'id' => $this->id()->__toString(),
+            'cif' => $this->associationCif()->value(),
+            'name' => $this->associationName()->value(),
+            'city_id' => $this->associationCityId()->value(),
+            'email' => $this->associationEmail()->value(),
             'active' => $this->isActive(),
         ];
     }

@@ -20,12 +20,14 @@ final readonly class UserUpdate
     ) {}
 
     public function __invoke(
-        UserId $id,
-        UserName $name,
-        UserFirstLastName $firstLastName,
-        UserSecondLastName $secondLastName,
+        string $id,
+        string $name,
+        string $firstLastName,
+        string $secondLastName,
     ): void {
-        $user = $this->repository->findById($id);
+        $user = $this->repository->findById(
+            new UserId($id)
+        );
         if (!$user instanceof User) {
             throw UserNotFoundException::create();
         }
@@ -34,9 +36,9 @@ final readonly class UserUpdate
             throw UserStatusException::create();
         }
 
-        $user->updateName($name->value());
-        $user->updateFirstLastName($firstLastName->value());
-        $user->updateSecondLastName($secondLastName->value());
+        $user->updateName(new UserName($name));
+        $user->updateFirstLastName(new UserFirstLastName($firstLastName));
+        $user->updateSecondLastName(new UserSecondLastName($secondLastName));
 
         $this->repository->updateUser($user);
     }

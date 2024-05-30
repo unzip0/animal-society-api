@@ -20,8 +20,8 @@ final class SendWelcomeEmailOnAssociationCreated implements DomainEventSubscribe
         $this->notifier->notify(
             $association,
             new AssociationWelcomeNotification(
-                $association->associationName(),
-                $association->associationEmail()
+                $association->associationName()->value(),
+                $association->associationEmail()->value(),
             ),
         );
     }

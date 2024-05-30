@@ -41,14 +41,14 @@ final class UserMapper extends ModelDomainMapper
         $active = $model->isActive();
 
         $domain = new DomainUser(
-            id: $id->value(),
-            name: $name->value(),
-            firstLastName: $firstLastName->value(),
-            secondLastName: $secondLastName->value(),
-            email: $email->value(),
-            password: $password->value(),
-            associationId: $associationId->value(),
-            role: $role->value(),
+            id: $id,
+            name: $name,
+            firstLastName: $firstLastName,
+            secondLastName: $secondLastName,
+            email: $email,
+            password: $password,
+            associationId: $associationId,
+            role: $role,
             active: $active,
         );
 

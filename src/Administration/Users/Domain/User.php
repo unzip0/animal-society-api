@@ -10,26 +10,26 @@ use AnimalSociety\Shared\Domain\Mapper\Domain;
 final class User extends AggregateRoot implements Domain
 {
     public function __construct(
-        private readonly string $id,
-        private string $name,
-        private string $firstLastName,
-        private string $secondLastName,
-        private string $email,
-        private string $password,
-        private readonly string $associationId,
-        private readonly string $role,
+        private readonly UserId $id,
+        private UserName $name,
+        private UserFirstLastName $firstLastName,
+        private UserSecondLastName $secondLastName,
+        private UserEmail $email,
+        private UserPassword $password,
+        private readonly UserAssociationId $associationId,
+        private readonly UserRole $role,
         private bool $active,
     ) {}
 
     public static function create(
-        string $id,
-        string $name,
-        string $firstLastName,
-        string $secondLastName,
-        string $email,
-        string $password,
-        string $associationId,
-        string $role,
+        UserId $id,
+        UserName $name,
+        UserFirstLastName $firstLastName,
+        UserSecondLastName $secondLastName,
+        UserEmail $email,
+        UserPassword $password,
+        UserAssociationId $associationId,
+        UserRole $role,
     ): self {
         $user = new self(
             id: $id,
@@ -48,42 +48,42 @@ final class User extends AggregateRoot implements Domain
         return $user;
     }
 
-    public function id(): string
+    public function id(): UserId
     {
         return $this->id;
     }
 
-    public function name(): string
+    public function name(): UserName
     {
         return $this->name;
     }
 
-    public function firstLastName(): string
+    public function firstLastName(): UserFirstLastName
     {
         return $this->firstLastName;
     }
 
-    public function secondLastName(): string
+    public function secondLastName(): UserSecondLastName
     {
         return $this->secondLastName;
     }
 
-    public function email(): string
+    public function email(): UserEmail
     {
         return $this->email;
     }
 
-    public function password(): string
+    public function password(): UserPassword
     {
         return $this->password;
     }
 
-    public function associationId(): string
+    public function associationId(): UserAssociationId
     {
         return $this->associationId;
     }
 
-    public function role(): string
+    public function role(): UserRole
     {
         return $this->role;
     }
@@ -93,27 +93,27 @@ final class User extends AggregateRoot implements Domain
         return $this->active === true;
     }
 
-    public function updateEmail(string $email): void
+    public function updateEmail(UserEmail $email): void
     {
         $this->email = $email;
     }
 
-    public function updatePassword(string $password): void
+    public function updatePassword(UserPassword $password): void
     {
         $this->password = $password;
     }
 
-    public function updateName(string $name): void
+    public function updateName(UserName $name): void
     {
         $this->name = $name;
     }
 
-    public function updateFirstLastName(string $firstLastName): void
+    public function updateFirstLastName(UserFirstLastName $firstLastName): void
     {
         $this->firstLastName = $firstLastName;
     }
 
-    public function updateSecondLastName(string $secondLastName): void
+    public function updateSecondLastName(UserSecondLastName $secondLastName): void
     {
         $this->secondLastName = $secondLastName;
     }
@@ -129,13 +129,13 @@ final class User extends AggregateRoot implements Domain
     public function toArray(): array
     {
         return [
-            'id' => $this->id(),
-            'name' => $this->name(),
-            'first_last_name' => $this->firstLastName(),
-            'second_last_name' => $this->secondLastName(),
-            'email' => $this->email(),
-            'association_id' => $this->associationId(),
-            'role' => $this->role(),
+            'id' => $this->id()->__toString(),
+            'name' => $this->name()->value(),
+            'first_last_name' => $this->firstLastName()->value(),
+            'second_last_name' => $this->secondLastName()->value(),
+            'email' => $this->email()->value(),
+            'association_id' => $this->associationId()->__toString(),
+            'role' => $this->role()->value(),
             'active' => $this->isActive(),
         ];
     }
@@ -146,17 +146,7 @@ final class User extends AggregateRoot implements Domain
     public function transform(): array
     {
         return array_merge([
-            'password' => $this->password(),
-        ], $this->toArray());
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    public function profile(): array
-    {
-        return array_merge([
-            'active' => $this->isActive(),
+            'password' => $this->password()->value(),
         ], $this->toArray());
     }
 }
