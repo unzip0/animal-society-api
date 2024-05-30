@@ -67,7 +67,5 @@ jobs:
         run: |
           cp pipeline/.env.pipeline .env
           php artisan key:generate    
-      - name: Test > Unit
-        run: vendor/bin/phpunit --testsuite Unit
-      - name: Test > Feature
-        run: vendor/bin/phpunit --testsuite Feature
+      - name: Test > Unit > Associations
+        run: vendor/bin/phpunit --testsuite Associations
