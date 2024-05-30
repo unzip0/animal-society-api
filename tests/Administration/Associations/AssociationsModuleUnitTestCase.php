@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace AnimalSociety\Tests\Administration\Associations;
 
 use AnimalSociety\Administration\Associations\Domain\Association;
-use AnimalSociety\Administration\Associations\Domain\AssociationId;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
 use AnimalSociety\Tests\Shared\Infrastructure\PhpUnit\UnitTestCase;
 use Mockery\MockInterface;
@@ -32,11 +31,11 @@ abstract class AssociationsModuleUnitTestCase extends UnitTestCase
             ->andReturnNull();
     }
 
-    protected function shouldFindOneBy(AssociationId $id, ?Association $association): void
+    protected function shouldFindOneByCriteria(array $criteria, ?Association $association): void
     {
         $this->repository()
             ->shouldReceive('findOneBy')
-            ->with($this->similarTo($id))
+            ->with($criteria)
             ->once()
             ->andReturn($association);
     }
@@ -48,6 +47,24 @@ abstract class AssociationsModuleUnitTestCase extends UnitTestCase
             ->with($criteria)
             ->once()
             ->andReturn(null);
+    }
+
+    protected function shouldReturnEmptyArray(): void
+    {
+        $this->repository()
+            ->shouldReceive('findAll')
+            ->once()
+            ->andReturn([]);
+    }
+
+    protected function shouldReturnItemsInArray(Association $association): void
+    {
+        $this->repository()
+            ->shouldReceive('findAll')
+            ->once()
+            ->andReturn(
+                [$this->similarTo($association->toArray())]
+            );
     }
 
     protected function repository(): AssociationRepository|MockInterface
