@@ -9,6 +9,7 @@ use AnimalSociety\Shared\Domain\Bus\Event\DomainEvent;
 use AnimalSociety\Shared\Domain\Bus\Event\EventBus;
 use AnimalSociety\Shared\Domain\Bus\Query\Query;
 use AnimalSociety\Shared\Domain\Bus\Query\Response;
+use AnimalSociety\Tests\CreatesApplication;
 use AnimalSociety\Tests\Shared\Domain\TestUtils;
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryTestCase;
@@ -18,7 +19,14 @@ use Throwable;
 
 abstract class UnitTestCase extends MockeryTestCase
 {
+    use CreatesApplication;
     private EventBus|MockInterface|null $eventBus = null;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->createApplication();
+    }
 
     protected function mock(string $className): MockInterface
     {
