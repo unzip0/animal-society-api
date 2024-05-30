@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Associations\Application\create;
 
-use AnimalSociety\Administration\Associations\Application\find\AssociationFinder;
 use AnimalSociety\Administration\Associations\Domain\Association;
 use AnimalSociety\Administration\Associations\Domain\AssociationCif;
 use AnimalSociety\Administration\Associations\Domain\AssociationCityId;
@@ -20,7 +19,6 @@ final readonly class AssociationCreator
 {
     public function __construct(
         private AssociationRepository $repository,
-        private AssociationFinder $associationFinder,
         private EventBus $bus,
     ) {}
 
@@ -48,17 +46,21 @@ final readonly class AssociationCreator
 
     private function checkAssociationConstraints(Association $association): void
     {
-        $associationWithSameCif = $this->associationFinder->__invoke([
-            'cif' => $association->associationCif()->value(),
-        ]);
+        $associationWithSameCif = $this->repository->findOneBy(
+            [
+                'cif' => $association->associationCif()->value(),
+            ]
+        );
 
         if ($associationWithSameCif instanceof Association) {
             throw AssociationCifAlreadyExistsException::create();
         }
 
-        $associationWithSameEmail = $this->associationFinder->__invoke([
-            'email' => $association->associationEmail()->value(),
-        ]);
+        $associationWithSameEmail = $this->repository->findOneBy(
+            [
+                'email' => $association->associationEmail()->value(),
+            ]
+        );
 
         if ($associationWithSameEmail instanceof Association) {
             throw AssociationEmailInvalidException::create();
