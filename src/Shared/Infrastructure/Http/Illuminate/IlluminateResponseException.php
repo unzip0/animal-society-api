@@ -17,7 +17,10 @@ class IlluminateResponseException extends HttpResponseException
         ?int $code = null,
         int $httpStattus = null,
     ): self {
-        return new self(
+        /**
+         * @phpstan-ignore-next-line
+         */
+        return new static(
             IlluminateApiResponse::create(
                 [
                     'code' => $code ?? static::CODE,
