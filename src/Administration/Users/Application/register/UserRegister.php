@@ -10,7 +10,15 @@ use AnimalSociety\Administration\Associations\Domain\Exception\AssociationEmailI
 use AnimalSociety\Administration\Users\Application\find\UserFinder;
 use AnimalSociety\Administration\Users\Domain\Exception\UserEmailAreadyUsedException;
 use AnimalSociety\Administration\Users\Domain\User;
+use AnimalSociety\Administration\Users\Domain\UserAssociationId;
+use AnimalSociety\Administration\Users\Domain\UserEmail;
+use AnimalSociety\Administration\Users\Domain\UserFirstLastName;
+use AnimalSociety\Administration\Users\Domain\UserId;
+use AnimalSociety\Administration\Users\Domain\UserName;
+use AnimalSociety\Administration\Users\Domain\UserPassword;
 use AnimalSociety\Administration\Users\Domain\UserRepository;
+use AnimalSociety\Administration\Users\Domain\UserRole;
+use AnimalSociety\Administration\Users\Domain\UserSecondLastName;
 use AnimalSociety\Shared\Domain\Bus\Event\EventBus;
 
 final readonly class UserRegister
@@ -39,14 +47,14 @@ final readonly class UserRegister
         $this->checkUserConstraints($email, $associationId);
 
         $user = User::create(
-            id: $id,
-            name: $name,
-            firstLastName: $firstLastName,
-            secondLastName: $secondLastName,
-            email: $email,
-            password: bcrypt($password),
-            associationId: $associationId,
-            role: $role,
+            id: new UserId($id),
+            name: new UserName($name),
+            firstLastName: new UserFirstLastName($firstLastName),
+            secondLastName: new UserSecondLastName($secondLastName),
+            email: new UserEmail($email),
+            password: new UserPassword(bcrypt($password)),
+            associationId: new UserAssociationId($associationId),
+            role: new UserRole($role),
         );
 
         $this->repository->create($user);
@@ -87,6 +95,6 @@ final readonly class UserRegister
             throw AssociationEmailInvalidException::create();
         }
 
-        return $associationWithEmail->id();
+        return $associationWithEmail->id()->__toString();
     }
 }

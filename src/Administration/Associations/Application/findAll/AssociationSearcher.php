@@ -25,11 +25,11 @@ final readonly class AssociationSearcher
     private function toResponse(): callable
     {
         return static fn (Association $association): AssociationResponse => new AssociationResponse(
-            $association->id(),
-            $association->associationCif(),
-            $association->associationName(),
-            $association->associationEmail(),
-            $association->associationCityId()
+            $association->id()->__toString(),
+            $association->associationCif()->value(),
+            $association->associationName()->value(),
+            $association->associationEmail()->value(),
+            $association->associationCityId()->value()
         );
     }
 }

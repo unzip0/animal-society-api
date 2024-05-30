@@ -23,7 +23,7 @@ final class UsersProfileController extends ApiController
         /** @var DomainUser $domainUser */
         $domainUser = $userMapper->modelToDomain($user);
 
-        return $this->response($domainUser->profile());
+        return $this->response($domainUser->toArray());
     }
 
     /**
