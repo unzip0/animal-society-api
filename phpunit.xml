@@ -8,11 +8,8 @@
          stopOnFailure="false"
 >
     <testsuites>
-        <testsuite name="Unit">
-            <directory>tests/Unit</directory>
-        </testsuite>
-        <testsuite name="Feature">
-            <directory>tests/Feature</directory>
+        <testsuite name="Associations">
+            <directory>tests/Administration/Associations</directory>
         </testsuite>
     </testsuites>
     <source>
