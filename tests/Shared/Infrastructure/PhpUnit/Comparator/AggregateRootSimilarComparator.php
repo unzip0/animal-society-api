@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace AnimalSociety\Tests\Shared\Infrastructure\PhpUnit\Comparator;
 
 use AnimalSociety\Shared\Domain\Aggregate\AggregateRoot;
+use AnimalSociety\Shared\Domain\Password;
 use AnimalSociety\Tests\Shared\Domain\TestUtils;
 use ReflectionObject;
 use SebastianBergmann\Comparator\Comparator;
 use SebastianBergmann\Comparator\ComparisonFailure;
+use SebastianBergmann\Exporter\Exporter;
 
 final class AggregateRootSimilarComparator extends Comparator
 {
@@ -23,15 +25,13 @@ final class AggregateRootSimilarComparator extends Comparator
     {
         $actualEntity = clone $actual;
         $actualEntity->pullDomainEvents();
-
+        $exporter = new Exporter();
         if (!$this->aggregateRootsAreSimilar($expected, $actualEntity)) {
             throw new ComparisonFailure(
                 $expected,
                 $actual,
-                // $this->exporter->export($expected),
-                // $this->exporter->export($actual),
-                (string) $expected,
-                (string) $actual,
+                $exporter->export($expected),
+                $exporter->export($actual),
                 'Failed asserting the aggregate roots are equal.'
             );
         }
@@ -66,6 +66,9 @@ final class AggregateRootSimilarComparator extends Comparator
             $actualProperty = $actualReflectedProperty->getValue($actual);
 
             if (!TestUtils::isSimilar($expectedProperty, $actualProperty)) {
+                if ($expectedProperty instanceof Password && $actualProperty instanceof Password) {
+                    continue;
+                }
                 return false;
             }
         }

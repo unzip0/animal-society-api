@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace AnimalSociety\Administration\Users\Domain;
 
 use AnimalSociety\Administration\Users\Domain\Exception\UserInvalidPasswordException;
+use AnimalSociety\Shared\Domain\Password;
 use AnimalSociety\Shared\Domain\ValueObject\StringValueObject;
 
-final class UserPassword extends StringValueObject
+final class UserPassword extends StringValueObject implements Password
 {
     private const string PASSWORD_REGEXP = '/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/';
 
