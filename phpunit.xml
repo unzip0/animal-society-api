@@ -11,6 +11,9 @@
         <testsuite name="Associations">
             <directory>tests/Administration/Associations</directory>
         </testsuite>
+        <testsuite name="Users">
+            <directory>tests/Administration/Users</directory>
+        </testsuite>
     </testsuites>
     <source>
         <include>
