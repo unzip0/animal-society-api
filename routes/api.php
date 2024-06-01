@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administration\Animals\AnimalsRaces\AnimalRacesCreateController;
 use App\Http\Controllers\Administration\Animals\AnimalsSpecies\AnimalSpeciesCreateController;
 use App\Http\Controllers\Administration\Associations\AssociationsCreateController;
 use App\Http\Controllers\Administration\Associations\AssociationsSearchController;
@@ -49,8 +50,13 @@ Route::prefix('v1')->group(function () {
         });
 
         Route::prefix('animals')->group(function() {
+             
             Route::prefix('species')->group(function() {
                 Route::post('create', AnimalSpeciesCreateController::class);
+            });
+
+            Route::prefix('races')->group(function() {
+                Route::post('create', AnimalRacesCreateController::class);
             });
         });
      

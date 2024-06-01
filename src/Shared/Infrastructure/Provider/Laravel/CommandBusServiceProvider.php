@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
+use AnimalSociety\Administration\Animals\AnimalsRaces\Application\create\CreateAnimalRaceCommand;
+use AnimalSociety\Administration\Animals\AnimalsRaces\Application\create\CreateAnimalRaceCommandHandler;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Application\create\CreateAnimalSpeciesCommand;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Application\create\CreateAnimalSpeciesCommandHandler;
 use AnimalSociety\Administration\Associations\Application\create\CreateAssociationCommand;
@@ -63,6 +65,7 @@ class CommandBusServiceProvider extends ServiceProvider
     {
         return [
             CreateAnimalSpeciesCommand::class => CreateAnimalSpeciesCommandHandler::class,
+            CreateAnimalRaceCommand::class => CreateAnimalRaceCommandHandler::class,
         ];
     }
 }
