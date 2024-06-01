@@ -8,7 +8,7 @@ use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\AnimalSpecies;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\AnimalSpeciesId;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\AnimalSpeciesName;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\AnimalSpeciesRepository;
-use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\Exception\AnimalSpeciesNameAlreadyExistsException;
+use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\Exceptions\AnimalSpeciesNameAlreadyExistsException;
 
 final readonly class AnimalSpeciesCreator
 {
