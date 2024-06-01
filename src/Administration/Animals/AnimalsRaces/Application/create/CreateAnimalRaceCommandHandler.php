@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Animals\AnimalsRaces\Application\create;
 
-use AnimalSociety\Administration\Animals\AnimalsRaces\Application\create\AnimalRaceCreator;
-use AnimalSociety\Administration\Animals\AnimalsRaces\Application\create\CreateAnimalRaceCommand;
 use AnimalSociety\Shared\Domain\Bus\Command\CommandHandler;
 
 final readonly class CreateAnimalRaceCommandHandler implements CommandHandler
