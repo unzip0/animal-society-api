@@ -35,6 +35,9 @@ class CommandBusServiceProvider extends ServiceProvider
         );
     }
 
+    /**
+     * @return array<string,string>
+     */
     private function associationCommandBindings(): array
     {
         return [
@@ -42,6 +45,9 @@ class CommandBusServiceProvider extends ServiceProvider
         ];
     }
 
+    /**
+     * @return array<string,string>
+     */
     private function userCommandBindings(): array
     {
         return [
@@ -50,6 +56,9 @@ class CommandBusServiceProvider extends ServiceProvider
         ];
     }
 
+    /**
+     * @return array<string,string>
+     */
     private function animalCommandBindings(): array
     {
         return [
