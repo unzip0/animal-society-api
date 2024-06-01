@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Animals\AnimalPhotos\Domain;
 
-use AnimalSociety\Administration\Animals\AnimalPhotos\Domain\Exception\InvalidFileUrlException;
+use AnimalSociety\Administration\Animals\AnimalPhotos\Domain\Exceptions\InvalidFileUrlException;
 use AnimalSociety\Shared\Domain\ValueObject\StringValueObject;
 
 final class AnimalPhotoUrl extends StringValueObject
