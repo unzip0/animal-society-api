@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
+use AnimalSociety\Administration\Animals\AnimalsRaces\Domain\AnimalRaceRepository;
+use AnimalSociety\Administration\Animals\AnimalsRaces\Infrastructure\Persistence\EloquentAdministrationAnimalRaceRepository;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\AnimalSpeciesRepository;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Infrastructure\Persistence\EloquentAdministrationAnimalSpeciesRepository;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
@@ -41,6 +43,7 @@ class RepositoryServiceProvider extends ServiceProvider
             AssociationRepository::class => EloquentAdministrationAssociationRepository::class,
             UserRepository::class => EloquentAdministrationUserRepository::class,
             AnimalSpeciesRepository::class => EloquentAdministrationAnimalSpeciesRepository::class,
+            AnimalRaceRepository::class => EloquentAdministrationAnimalRaceRepository::class,
         ];
     }
 }
