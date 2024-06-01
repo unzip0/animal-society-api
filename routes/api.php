@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administration\Animals\AnimalsSpecies\AnimalSpeciesCreateController;
 use App\Http\Controllers\Administration\Associations\AssociationsCreateController;
 use App\Http\Controllers\Administration\Associations\AssociationsSearchController;
 use App\Http\Controllers\Administration\Users\UsersLoginController;
@@ -45,6 +46,12 @@ Route::prefix('v1')->group(function () {
             Route::get('profile', UsersProfileController::class);
             Route::post('logout', UsersLogoutController::class);
             Route::patch('{id}', UsersUpdateController::class);
+        });
+
+        Route::prefix('animals')->group(function() {
+            Route::prefix('species')->group(function() {
+                Route::post('create', AnimalSpeciesCreateController::class);
+            });
         });
      
     });

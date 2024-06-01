@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
+use AnimalSociety\Administration\Animals\AnimalsSpecies\Application\create\CreateAnimalSpeciesCommand;
+use AnimalSociety\Administration\Animals\AnimalsSpecies\Application\create\CreateAnimalSpeciesCommandHandler;
 use AnimalSociety\Administration\Associations\Application\create\CreateAssociationCommand;
 use AnimalSociety\Administration\Associations\Application\create\CreateAssociationCommandHandler;
 use AnimalSociety\Administration\Users\Application\register\RegisterUserCommand;
@@ -26,10 +28,32 @@ class CommandBusServiceProvider extends ServiceProvider
      */
     private function commandBindings(): array
     {
+        return array_merge(
+            $this->associationCommandBindings(),
+            $this->userCommandBindings(),
+            $this->animalCommandBindings()
+        );
+    }
+
+    private function associationCommandBindings(): array
+    {
         return [
             CreateAssociationCommand::class => CreateAssociationCommandHandler::class,
+        ];
+    }
+
+    private function userCommandBindings(): array
+    {
+        return [
             RegisterUserCommand::class => RegisterUserCommandHandler::class,
             UpdateUserCommand::class => UpdateUserCommandHandler::class,
+        ];
+    }
+
+    private function animalCommandBindings(): array
+    {
+        return [
+            CreateAnimalSpeciesCommand::class => CreateAnimalSpeciesCommandHandler::class,
         ];
     }
 }
