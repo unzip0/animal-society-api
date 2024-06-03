@@ -18,7 +18,8 @@
         "laravel/tinker": "^2.8",
         "php-open-source-saver/jwt-auth": "^2.2",
         "predis/predis": "^2.2",
-        "skilla/validator-cif-nif-nie": "^1.0"
+        "skilla/validator-cif-nif-nie": "^1.0",
+        "spatie/laravel-medialibrary": "^11.5"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
