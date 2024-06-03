@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Animals\AnimalPhotos\Domain;
 
-use AnimalSociety\Administration\Animals\AnimalPhotos\Domain\Exceptions\InvalidFileNameException;
+use AnimalSociety\Administration\Animals\AnimalPhotos\Domain\Exceptions\InvalidFileExtensionException;
 use AnimalSociety\Shared\Domain\ValueObject\StringValueObject;
 
 final class AnimalPhotoFileExtension extends StringValueObject
@@ -27,7 +27,7 @@ final class AnimalPhotoFileExtension extends StringValueObject
     private function ensureIsValidFileExtension(string $extension): void
     {
         if (!in_array($extension, self::ALLOWED_EXTENSIONS, true)) {
-            throw InvalidFileNameException::create();
+            throw InvalidFileExtensionException::create();
         }
     }
 }
