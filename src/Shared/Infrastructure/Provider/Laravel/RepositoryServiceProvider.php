@@ -8,6 +8,8 @@ use AnimalSociety\Administration\Animals\AnimalsRaces\Domain\AnimalRaceRepositor
 use AnimalSociety\Administration\Animals\AnimalsRaces\Infrastructure\Persistence\EloquentAdministrationAnimalRaceRepository;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\AnimalSpeciesRepository;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Infrastructure\Persistence\EloquentAdministrationAnimalSpeciesRepository;
+use AnimalSociety\Administration\Animals\Domain\AnimalRepository;
+use AnimalSociety\Administration\Animals\Infrastructure\Persistence\EloquentAdministrationAnimalRepository;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
 use AnimalSociety\Administration\Associations\Infrastructure\Persistence\EloquentAdministrationAssociationRepository;
 use AnimalSociety\Administration\Users\Domain\UserRepository;
@@ -44,6 +46,7 @@ class RepositoryServiceProvider extends ServiceProvider
             UserRepository::class => EloquentAdministrationUserRepository::class,
             AnimalSpeciesRepository::class => EloquentAdministrationAnimalSpeciesRepository::class,
             AnimalRaceRepository::class => EloquentAdministrationAnimalRaceRepository::class,
+            AnimalRepository::class => EloquentAdministrationAnimalRepository::class,
         ];
     }
 }

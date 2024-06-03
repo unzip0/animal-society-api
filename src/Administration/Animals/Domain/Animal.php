@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Administration\Animals\Domain;
 
+use AnimalSociety\Administration\Animals\AnimalPhotos\Domain\AnimalPhoto;
+use AnimalSociety\Administration\Animals\AnimalsRaces\Domain\AnimalRaceId;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Domain\AnimalSpeciesId;
+use AnimalSociety\Administration\Associations\Domain\AssociationId;
 use AnimalSociety\Shared\Domain\Aggregate\AggregateRoot;
 use AnimalSociety\Shared\Domain\Mapper\Domain;
 
@@ -12,21 +15,23 @@ final class Animal extends AggregateRoot implements Domain
 {
     public function __construct(
         private readonly AnimalId $animalId,
-        private readonly AnimalAssociationId $animalAssociationId,
+        private readonly AssociationId $animalAssociationId,
         private readonly AnimalName $animalName,
         private readonly AnimalSpeciesId $animalSpeciesId,
         private readonly AnimalRaceId $animalRaceId,
         private readonly AnimalAge $animalAge,
+        private readonly AnimalPhoto $animalPhoto,
         private readonly bool $animalAvailable,
     ) {}
 
     public static function create(
         AnimalId $animalId,
-        AnimalAssociationId $animalAssociationId,
+        AssociationId $animalAssociationId,
         AnimalName $animalName,
         AnimalSpeciesId $animalSpeciesId,
         AnimalRaceId $animalRaceId,
         AnimalAge $animalAge,
+        AnimalPhoto $animalPhoto,
     ): self {
         $animal = new self(
             animalId: $animalId,
@@ -35,6 +40,7 @@ final class Animal extends AggregateRoot implements Domain
             animalSpeciesId: $animalSpeciesId,
             animalRaceId: $animalRaceId,
             animalAge: $animalAge,
+            animalPhoto: $animalPhoto,
             animalAvailable: true,
         );
 
@@ -46,7 +52,7 @@ final class Animal extends AggregateRoot implements Domain
         return $this->animalId;
     }
 
-    public function animalAssociationId(): AnimalAssociationId
+    public function animalAssociationId(): AssociationId
     {
         return $this->animalAssociationId;
     }
@@ -69,6 +75,11 @@ final class Animal extends AggregateRoot implements Domain
     public function animalAge(): AnimalAge
     {
         return $this->animalAge;
+    }
+
+    public function animalPhoto(): AnimalPhoto
+    {
+        return $this->animalPhoto;
     }
 
     public function isAvailable(): bool

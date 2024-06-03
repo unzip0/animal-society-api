@@ -8,6 +8,8 @@ use AnimalSociety\Administration\Animals\AnimalsRaces\Application\create\CreateA
 use AnimalSociety\Administration\Animals\AnimalsRaces\Application\create\CreateAnimalRaceCommandHandler;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Application\create\CreateAnimalSpeciesCommand;
 use AnimalSociety\Administration\Animals\AnimalsSpecies\Application\create\CreateAnimalSpeciesCommandHandler;
+use AnimalSociety\Administration\Animals\Application\create\CreateAnimalCommand;
+use AnimalSociety\Administration\Animals\Application\create\CreateAnimalCommandHandler;
 use AnimalSociety\Administration\Associations\Application\create\CreateAssociationCommand;
 use AnimalSociety\Administration\Associations\Application\create\CreateAssociationCommandHandler;
 use AnimalSociety\Administration\Users\Application\register\RegisterUserCommand;
@@ -66,6 +68,7 @@ class CommandBusServiceProvider extends ServiceProvider
         return [
             CreateAnimalSpeciesCommand::class => CreateAnimalSpeciesCommandHandler::class,
             CreateAnimalRaceCommand::class => CreateAnimalRaceCommandHandler::class,
+            CreateAnimalCommand::class => CreateAnimalCommandHandler::class,
         ];
     }
 }
