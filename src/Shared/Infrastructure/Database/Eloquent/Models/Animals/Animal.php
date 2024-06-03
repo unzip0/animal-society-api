@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Infrastructure\Database\Eloquent\Models\Animals;
 
+use AnimalSociety\Shared\Domain\FileSystem\UploadedFile;
 use AnimalSociety\Shared\Infrastructure\Database\Eloquent\Models\Association;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * @property string $id
@@ -18,8 +20,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * @property int $age
  * @property bool $available
  */
-class Animal extends Model
+class Animal extends Model implements HasMedia
 {
+    use InteractsWithMedia;
+    public const MORPH_ALIAS = 'animal-society::animal';
     public $incrementing = false;
     protected $table = 'animals';
     protected $keyType = 'string';
@@ -67,7 +71,7 @@ class Animal extends Model
 
     public function age(): int
     {
-        return $this->age;
+        return intval($this->age);
     }
 
     public function isAvailable(): bool
@@ -90,8 +94,8 @@ class Animal extends Model
         return $this->belongsTo(Association::class, 'association_id');
     }
 
-    public function photo(): HasOne
+    public function defaultMediaCollection(): string
     {
-        return $this->hasOne(AnimalPhoto::class, 'animal_id');
+        return UploadedFile::MEDIA_ANIMAL;
     }
 }
