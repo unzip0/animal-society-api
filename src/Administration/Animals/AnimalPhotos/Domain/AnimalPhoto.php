@@ -6,45 +6,34 @@ namespace AnimalSociety\Administration\Animals\AnimalPhotos\Domain;
 
 use AnimalSociety\Administration\Animals\Domain\AnimalId;
 use AnimalSociety\Shared\Domain\Aggregate\AggregateRoot;
-use AnimalSociety\Shared\Domain\Mapper\Domain;
+use AnimalSociety\Shared\Domain\FileSystem\UploadedFile;
 
-final class AnimalPhoto extends AggregateRoot implements Domain
+final class AnimalPhoto extends AggregateRoot implements UploadedFile
 {
     public function __construct(
-        private readonly AnimalPhotoId $animalPhotoId,
         private readonly AnimalId $animalId,
         private readonly AnimalPhotoFileName $animalPhotoFileName,
         private readonly AnimalPhotoFilePath $animalPhotoFilePath,
         private readonly AnimalPhotoFileExtension $animalPhotoFileExtension,
         private readonly AnimalPhotoFileMimeType $animalPhotoFileMimeType,
-        private readonly AnimalPhotoUrl $animalPhotoUrl,
     ) {}
 
     public static function create(
-        AnimalPhotoId $animalPhotoId,
         AnimalId $animalId,
         AnimalPhotoFileName $animalPhotoFileName,
         AnimalPhotoFilePath $animalPhotoFilePath,
         AnimalPhotoFileExtension $animalPhotoFileExtension,
         AnimalPhotoFileMimeType $animalPhotoFileMimeType,
-        AnimalPhotoUrl $animalPhotoUrl,
     ): self {
-        $animaleRace = new self(
-            animalPhotoId: $animalPhotoId,
+        $animalPhoto = new self(
             animalId: $animalId,
             animalPhotoFileName: $animalPhotoFileName,
             animalPhotoFilePath: $animalPhotoFilePath,
             animalPhotoFileExtension: $animalPhotoFileExtension,
             animalPhotoFileMimeType: $animalPhotoFileMimeType,
-            animalPhotoUrl: $animalPhotoUrl,
         );
 
-        return $animaleRace;
-    }
-
-    public function animalPhotoId(): AnimalPhotoId
-    {
-        return $this->animalPhotoId;
+        return $animalPhoto;
     }
 
     public function animalId(): AnimalId
@@ -72,32 +61,33 @@ final class AnimalPhoto extends AggregateRoot implements Domain
         return $this->animalPhotoFileMimeType;
     }
 
-    public function animalPhotoUrl(): AnimalPhotoUrl
+    public function getFileExtension(): string
     {
-        return $this->animalPhotoUrl;
+        return $this->animalPhotoFileExtension()->value();
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function toArray(): array
+    public function getFileMimeType(): string
     {
-        return [
-            'id' => $this->animalPhotoId->value(),
-            'animal_id' => $this->animalId->value(),
-            'file_name' => $this->animalPhotoFileName->value(),
-            'file_path' => $this->animalPhotoFilePath->value(),
-            'file_extension' => $this->animalPhotoFileExtension->value(),
-            'file_mime_type' => $this->animalPhotoFileMimeType->value(),
-            'url' => $this->animalPhotoUrl->value(),
-        ];
+        return $this->animalPhotoFileMimeType()->value();
     }
 
-    /**
-     * @return array<string, mixed>
-     */
-    public function transform(): array
+    public function getFileName(): string
     {
-        return $this->toArray();
+        return $this->animalPhotoFileName()->value();
+    }
+
+    public function getFilePath(): string
+    {
+        return $this->animalPhotoFilePath()->value();
+    }
+
+    public function getMediaModelId(): string
+    {
+        return $this->animalId()->value();
+    }
+
+    public function getMediaModelName(): string
+    {
+        return UploadedFile::MEDIA_ANIMAL;
     }
 }
