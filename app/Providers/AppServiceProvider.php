@@ -8,7 +8,9 @@ use AnimalSociety\Shared\Infrastructure\Provider\Laravel\CommandBusServiceProvid
 use AnimalSociety\Shared\Infrastructure\Provider\Laravel\InternalEventBusServiceProvider;
 use AnimalSociety\Shared\Infrastructure\Provider\Laravel\NotificationServiceProvider;
 use AnimalSociety\Shared\Infrastructure\Provider\Laravel\QueryBusServiceProvider;
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\RelationServiceProvider;
 use AnimalSociety\Shared\Infrastructure\Provider\Laravel\RepositoryServiceProvider;
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\StorageServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(QueryBusServiceProvider::class);
         $this->app->register(InternalEventBusServiceProvider::class);
         $this->app->register(NotificationServiceProvider::class);
+        $this->app->register(StorageServiceProvider::class);
+        $this->app->register(RelationServiceProvider::class);
     }
 
     /**
