@@ -40,11 +40,12 @@ final class EloquentAdministrationAnimalRepository extends EloquentRepository im
     }
 
     /**
+     * @param array<string,mixed> $criteria
      * @return Domain[]
      */
-    public function findAll(): array
+    public function matchingByCriteria(array $criteria): array
     {
-        return $this->findByCriteria([]);
+        return $this->findByCriteria($criteria);
     }
 
     protected function model(): Model

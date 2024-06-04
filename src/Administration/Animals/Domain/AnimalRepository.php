@@ -13,9 +13,10 @@ interface AnimalRepository
     public function create(Animal $animal): void;
 
     /**
+     * @param array<string,mixed> $criteria
      * @return Domain[]
      */
-    public function findAll(): array;
+    public function matchingByCriteria(array $criteria): array;
 
     public function findById(AnimalId $id): ?Domain;
 
