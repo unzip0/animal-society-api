@@ -74,7 +74,7 @@ final class AnimalMapper extends ModelDomainMapper
             animalId: $animalId,
             animalPhotoFileName: new AnimalPhotoFileName($media->name()),
             animalPhotoFilePath: new AnimalPhotoFilePath($media->getPath()),
-            animalPhotoFileExtension: new AnimalPhotoFileExtension($media->getTypeFromExtension()),
+            animalPhotoFileExtension: new AnimalPhotoFileExtension(pathinfo($media->name(), PATHINFO_EXTENSION)),
             animalPhotoFileMimeType: new AnimalPhotoFileMimeType($media->mimeType()),
         );
     }
