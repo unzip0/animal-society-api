@@ -20,6 +20,7 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
  * @property string $association_id
  * @property string $role
  * @property bool $active
+ * @property Association $association
  */
 class User extends Model implements JWTSubject, AuthenticatableContract
 {
@@ -109,6 +110,8 @@ class User extends Model implements JWTSubject, AuthenticatableContract
      */
     public function getJWTCustomClaims(): array
     {
-        return [];
+        return [
+            'association_id' => $this->association->id(),
+        ];
     }
 }
