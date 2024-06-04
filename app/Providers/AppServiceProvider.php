@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use AnimalSociety\Shared\Infrastructure\Provider\Laravel\AuthenticationServiceProvider;
 use AnimalSociety\Shared\Infrastructure\Provider\Laravel\CommandBusServiceProvider;
 use AnimalSociety\Shared\Infrastructure\Provider\Laravel\InternalEventBusServiceProvider;
 use AnimalSociety\Shared\Infrastructure\Provider\Laravel\NotificationServiceProvider;
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(NotificationServiceProvider::class);
         $this->app->register(StorageServiceProvider::class);
         $this->app->register(RelationServiceProvider::class);
+        $this->app->register(AuthenticationServiceProvider::class);
     }
 
     /**
