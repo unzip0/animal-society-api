@@ -3,6 +3,7 @@
 use App\Http\Controllers\Administration\Animals\AnimalCreateController;
 use App\Http\Controllers\Administration\Animals\AnimalsRaces\AnimalRacesCreateController;
 use App\Http\Controllers\Administration\Animals\AnimalsSpecies\AnimalSpeciesCreateController;
+use App\Http\Controllers\Administration\Animals\AssociationAnimalsGetController;
 use App\Http\Controllers\Administration\Associations\AssociationsCreateController;
 use App\Http\Controllers\Administration\Associations\AssociationsSearchController;
 use App\Http\Controllers\Administration\Users\UsersLoginController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\Administration\Users\UsersProfileController;
 use App\Http\Controllers\Administration\Users\UsersRegisterController;
 use App\Http\Controllers\Administration\Users\UsersUpdateController;
 use App\Http\Controllers\HealthCheck\HealthCheckGetController;
+use App\Http\Middleware\AllowedUserInAssociation;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,7 +61,11 @@ Route::prefix('v1')->group(function () {
                 Route::post('create', AnimalRacesCreateController::class);
             });
 
-            Route::post('create', AnimalCreateController::class);
+            Route::middleware(AllowedUserInAssociation::middlewareName())->group(function() {
+                Route::post('create', AnimalCreateController::class);
+                Route::get('search/all', AssociationAnimalsGetController::class);
+            });
+            
         });
      
     });

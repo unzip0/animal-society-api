@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+namespace AnimalSociety\Administration\Animals\Application;
+
+final readonly class AnimalResponse
+{
+    public function __construct(
+        private string $id,
+        private string $name,
+        private string $speciesId,
+        private string $raceId,
+        private int $age,
+        private bool $available,
+    ) {}
+
+    public function id(): string
+    {
+        return $this->id;
+    }
+
+    public function name(): string
+    {
+        return $this->name;
+    }
+
+    public function speciesId(): string
+    {
+        return $this->speciesId;
+    }
+
+    public function raceId(): string
+    {
+        return $this->raceId;
+    }
+
+    public function age(): int
+    {
+        return $this->age;
+    }
+
+    public function available(): bool
+    {
+        return $this->available;
+    }
+}

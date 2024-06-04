@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
+use AnimalSociety\Administration\Animals\Application\search\GetAssociationAnimalsQuery;
+use AnimalSociety\Administration\Animals\Application\search\GetAssociationAnimalsQueryHandler;
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQuery;
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQueryHandler;
 use AnimalSociety\Administration\Users\Application\login\LoginUserQuery;
@@ -27,6 +29,7 @@ class QueryBusServiceProvider extends ServiceProvider
         return [
             FindAllAssociationsQuery::class => FindAllAssociationsQueryHandler::class,
             LoginUserQuery::class => LoginUserQueryHandler::class,
+            GetAssociationAnimalsQuery::class => GetAssociationAnimalsQueryHandler::class,
         ];
     }
 }
