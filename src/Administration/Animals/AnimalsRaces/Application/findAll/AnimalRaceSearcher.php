@@ -17,7 +17,6 @@ final readonly class AnimalRaceSearcher
         private AnimalRaceRepository $repository
     ) {}
 
-
     public function searchAll(): AnimalRacesResponse
     {
         return new AnimalRacesResponse(...map(
