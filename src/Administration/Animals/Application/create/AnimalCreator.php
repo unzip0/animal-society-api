@@ -18,7 +18,7 @@ use AnimalSociety\Administration\Animals\Domain\AnimalName;
 use AnimalSociety\Administration\Animals\Domain\AnimalRepository;
 use AnimalSociety\Administration\Associations\Domain\AssociationId;
 use AnimalSociety\Administration\Associations\Domain\AssociationRepository;
-use AnimalSociety\Administration\Associations\Domain\Exceptions\AssociationNotFoundException;
+use AnimalSociety\Administration\Associations\Domain\Exception\AssociationNotFoundException;
 use AnimalSociety\Shared\Domain\FileSystem\Storage;
 
 final readonly class AnimalCreator
