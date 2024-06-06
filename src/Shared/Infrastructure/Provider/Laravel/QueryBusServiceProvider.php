@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Shared\Infrastructure\Provider\Laravel;
 
+use AnimalSociety\Administration\Animals\AnimalsRaces\Application\findAll\FindAllAnimalRacesQuery;
+use AnimalSociety\Administration\Animals\AnimalsRaces\Application\findAll\FindAllAnimalRacesQueryHandler;
+use AnimalSociety\Administration\Animals\AnimalsSpecies\Application\findAll\FindAllAnimalSpeciesQuery;
+use AnimalSociety\Administration\Animals\AnimalsSpecies\Application\findAll\FindAllAnimalSpeciesQueryHandler;
 use AnimalSociety\Administration\Animals\Application\search\GetAssociationAnimalsQuery;
 use AnimalSociety\Administration\Animals\Application\search\GetAssociationAnimalsQueryHandler;
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQuery;
@@ -30,6 +34,8 @@ class QueryBusServiceProvider extends ServiceProvider
             FindAllAssociationsQuery::class => FindAllAssociationsQueryHandler::class,
             LoginUserQuery::class => LoginUserQueryHandler::class,
             GetAssociationAnimalsQuery::class => GetAssociationAnimalsQueryHandler::class,
+            FindAllAnimalRacesQuery::class => FindAllAnimalRacesQueryHandler::class,
+            FindAllAnimalSpeciesQuery::class => FindAllAnimalSpeciesQueryHandler::class,
         ];
     }
 }
