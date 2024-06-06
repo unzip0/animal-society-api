@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AnimalSociety\Administration\Associations\Domain\Exceptions;
+namespace AnimalSociety\Administration\Associations\Domain\Exception;
 
 use AnimalSociety\Shared\Domain\Http\Exception\ApiResponseException;
 
