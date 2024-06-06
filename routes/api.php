@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Administration\Animals\AnimalCreateController;
 use App\Http\Controllers\Administration\Animals\AnimalsRaces\AnimalRacesCreateController;
+use App\Http\Controllers\Administration\Animals\AnimalsRaces\AnimalRacesFindAllController;
 use App\Http\Controllers\Administration\Animals\AnimalsSpecies\AnimalSpeciesCreateController;
+use App\Http\Controllers\Administration\Animals\AnimalsSpecies\AnimalSpeciesFindAllController;
 use App\Http\Controllers\Administration\Animals\AssociationAnimalsGetController;
 use App\Http\Controllers\Administration\Associations\AssociationsCreateController;
 use App\Http\Controllers\Administration\Associations\AssociationsSearchController;
@@ -37,6 +39,16 @@ Route::prefix('v1')->group(function () {
     Route::prefix('users')->group(function() {
         Route::post('register', UsersRegisterController::class);
         Route::post('login', UsersLoginController::class)->name('login');
+    });
+
+    Route::prefix('animals')->group(function() {
+        Route::prefix('races')->group(function() {
+            Route::get('all', AnimalRacesFindAllController::class);
+        });
+
+        Route::prefix('species')->group(function() {
+            Route::get('all', AnimalSpeciesFindAllController::class);
+        });
     });
 
     Route::middleware('auth:api')->group(function() {
