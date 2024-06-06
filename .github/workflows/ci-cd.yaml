@@ -69,3 +69,7 @@ jobs:
           php artisan key:generate    
       - name: Test > Unit > Associations
         run: vendor/bin/phpunit --testsuite Associations
+      - name: Test > Unit > Users
+        run: vendor/bin/phpunit --testsuite Users
+      - name: Test > Unit > Animals
+        run: vendor/bin/phpunit --testsuite Animals
