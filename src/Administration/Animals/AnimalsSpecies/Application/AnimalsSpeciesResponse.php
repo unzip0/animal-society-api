@@ -31,15 +31,12 @@ final class AnimalsSpeciesResponse implements Response
      */
     public function toArray(): array
     {
-        return array_reduce(
-            $this->animalSpecies(),
-            function (array $carry, AnimalSpeciesResponse $animalSpecies): array {
-                $carry[$animalSpecies->id()] = [
-                    'name' => $animalSpecies->name(),
-                ];
-                return $carry;
-            },
-            []
+        return array_map(
+            fn (AnimalSpeciesResponse $animalSpecies): array => [
+                'id' => $animalSpecies->id(),
+                'name' => $animalSpecies->name(),
+            ],
+            $this->animalSpecies()
         );
     }
 }
