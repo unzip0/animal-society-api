@@ -31,16 +31,13 @@ final class AnimalRacesResponse implements Response
      */
     public function toArray(): array
     {
-        return array_reduce(
-            $this->animalRaces(),
-            function (array $carry, AnimalRaceResponse $animalRace): array {
-                $carry[$animalRace->id()] = [
-                    'name' => $animalRace->name(),
-                    'species_id' => $animalRace->speciesId(),
-                ];
-                return $carry;
-            },
-            []
+        return array_map(
+            fn (AnimalRaceResponse $animalRaceResponse): array => [
+                'id' => $animalRaceResponse->id(),
+                'name' => $animalRaceResponse->name(),
+                'species_id' => $animalRaceResponse->speciesId(),
+            ],
+            $this->animalRaces()
         );
     }
 }
