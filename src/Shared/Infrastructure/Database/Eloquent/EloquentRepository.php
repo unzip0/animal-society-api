@@ -99,9 +99,9 @@ abstract class EloquentRepository
         return $this->model()->newQuery();
     }
 
-    protected function delete(Domain $domain): ?Model
+    protected function hardDelete(Domain $domain): ?bool
     {
         $model = $this->modelDomainMapper()->domainToModel($domain);
-        return $model->forceDelete() ? $model : null;
+        return $this->builder()->find($model->getKey())->delete(); // @phpstan-ignore-line
     }
 }

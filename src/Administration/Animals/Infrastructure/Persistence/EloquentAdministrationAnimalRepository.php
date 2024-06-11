@@ -26,6 +26,11 @@ final class EloquentAdministrationAnimalRepository extends EloquentRepository im
         $this->persist($animal);
     }
 
+    public function delete(Animal $animal): void
+    {
+        $this->hardDelete($animal);
+    }
+
     public function findById(AnimalId $id): ?Domain
     {
         return $this->find($id->value());

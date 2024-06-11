@@ -26,16 +26,16 @@ final class LocalFileStorage implements Storage
         return $media->getPath();
     }
 
-    public function delete(UploadedFile $file): void
+    public function delete(?UploadedFile $file): void
     {
+        if ($file === null) {
+            return;
+        }
         $modelName = $file->getMediaModelName();
         $modelId = $file->getMediaModelId();
         $model = $this->mediaModelResolver->resolve($modelName)->find($modelId); // @phpstan-ignore-line
-        $media = $model->where('file_name', basename($file->getFilePath()))->first();
-
-        if ($media) {
-            $media->delete();
-        }
+        $mediaCollection = $model->getMedia($model->defaultMediaCollection());
+        $mediaCollection->each(fn ($media) => $media->delete());
     }
 
     public function url(UploadedFile $file): ?string

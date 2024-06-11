@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('media', function (Blueprint $table) {
-            $table->uuid('uuid')->primary();
+            $table->id();
+            $table->uuid('uuid')->unique();
             $table->string('model_type');
             $table->uuid('model_id');
             $table->string('collection_name');

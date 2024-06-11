@@ -63,12 +63,16 @@ final class AnimalMapper extends ModelDomainMapper
         return $collection->map(fn (Model $model) => $this->modelToDomain($model));
     }
 
-    private function getPhotoFromMedia(AnimalId $animalId): AnimalPhoto
+    private function getPhotoFromMedia(AnimalId $animalId): ?AnimalPhoto
     {
-        /** @var Media $media */
+        /** @var Media|null $media */
         $media = Media::where('model_type', ModelAnimal::MORPH_ALIAS) // @phpstan-ignore-line
             ->where('model_id', $animalId->value())
             ->first();
+
+        if ($media === null) {
+            return null;
+        }
 
         return AnimalPhoto::create(
             animalId: $animalId,
