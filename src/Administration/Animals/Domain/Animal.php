@@ -16,11 +16,11 @@ final class Animal extends AggregateRoot implements Domain
     public function __construct(
         private readonly AnimalId $animalId,
         private readonly AssociationId $animalAssociationId,
-        private readonly AnimalName $animalName,
-        private readonly AnimalSpeciesId $animalSpeciesId,
-        private readonly AnimalRaceId $animalRaceId,
-        private readonly AnimalAge $animalAge,
-        private readonly ?AnimalPhoto $animalPhoto,
+        private AnimalName $animalName,
+        private AnimalSpeciesId $animalSpeciesId,
+        private AnimalRaceId $animalRaceId,
+        private AnimalAge $animalAge,
+        private ?AnimalPhoto $animalPhoto,
         private readonly bool $animalAvailable,
     ) {}
 
@@ -85,6 +85,31 @@ final class Animal extends AggregateRoot implements Domain
     public function isAvailable(): bool
     {
         return $this->animalAvailable === true;
+    }
+
+    public function updateName(AnimalName $animalName): void
+    {
+        $this->animalName = $animalName;
+    }
+
+    public function updateSpecies(AnimalSpeciesId $animalSpeciesId): void
+    {
+        $this->animalSpeciesId = $animalSpeciesId;
+    }
+
+    public function updateRace(AnimalRaceId $animalRaceId): void
+    {
+        $this->animalRaceId = $animalRaceId;
+    }
+
+    public function updateAge(AnimalAge $animalAge): void
+    {
+        $this->animalAge = $animalAge;
+    }
+
+    public function updatePhoto(AnimalPhoto $animalPhoto): void
+    {
+        $this->animalPhoto = $animalPhoto;
     }
 
     /**

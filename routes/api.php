@@ -6,7 +6,8 @@ use App\Http\Controllers\Administration\Animals\AnimalsRaces\AnimalRacesFindAllC
 use App\Http\Controllers\Administration\Animals\AnimalsSpecies\AnimalSpeciesCreateController;
 use App\Http\Controllers\Administration\Animals\AnimalsSpecies\AnimalSpeciesFindAllController;
 use App\Http\Controllers\Administration\Animals\AssociationAnimalsGetController;
-use App\Http\Controllers\Administration\Animals\DeleteAnimalController;
+use App\Http\Controllers\Administration\Animals\AnimalsDeleteController;
+use App\Http\Controllers\Administration\Animals\AnimalsUpdateController;
 use App\Http\Controllers\Administration\Associations\AssociationsCreateController;
 use App\Http\Controllers\Administration\Associations\AssociationsSearchController;
 use App\Http\Controllers\Administration\Users\UsersLoginController;
@@ -77,7 +78,8 @@ Route::prefix('v1')->group(function () {
             Route::middleware(AllowedUserInAssociation::middlewareName())->group(function() {
                 Route::post('create', AnimalCreateController::class);
                 Route::get('search/all', AssociationAnimalsGetController::class);
-                Route::delete('{id}', DeleteAnimalController::class);
+                Route::post('{id}', AnimalsUpdateController::class);
+                Route::delete('{id}', AnimalsDeleteController::class);
             });
             
         });

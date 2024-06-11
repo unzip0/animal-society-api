@@ -26,4 +26,6 @@ interface AnimalRepository
     public function findOneBy(array $criteria): ?Domain;
 
     public function delete(Animal $animal): void;
+
+    public function updateAnimal(Animal $animal): void;
 }
