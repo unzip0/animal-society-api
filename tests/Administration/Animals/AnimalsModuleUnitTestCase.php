@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace AnimalSociety\Tests\Administration\Animals;
 
 use AnimalSociety\Administration\Animals\Domain\Animal;
+use AnimalSociety\Administration\Animals\Domain\AnimalId;
 use AnimalSociety\Administration\Animals\Domain\AnimalRepository;
 use AnimalSociety\Tests\Shared\Infrastructure\PhpUnit\UnitTestCase;
 use Mockery\MockInterface;
@@ -27,6 +28,24 @@ abstract class AnimalsModuleUnitTestCase extends UnitTestCase
         $this->repository()
             ->shouldReceive('create')
             ->with($this->similarTo($animal))
+            ->once()
+            ->andReturnNull();
+    }
+
+    protected function shouldFindById(AnimalId $id, Animal $animal): void
+    {
+        $this->repository()
+            ->shouldReceive('findById')
+            ->with($id->value())
+            ->once()
+            ->andReturn($animal);
+    }
+
+    protected function shouldNotFindByid(AnimalId $id): void
+    {
+        $this->repository()
+            ->shouldReceive('findById')
+            ->with($id->value())
             ->once()
             ->andReturnNull();
     }
@@ -66,6 +85,15 @@ abstract class AnimalsModuleUnitTestCase extends UnitTestCase
             ->andReturn(
                 [$this->similarTo($animal->toArray())]
             );
+    }
+
+    protected function shouldDelete(Animal $animal): void
+    {
+        $this->repository()
+            ->shouldReceive('delete')
+            ->with($this->similarTo($animal))
+            ->once()
+            ->andReturnNull();
     }
 
     protected function repository(): AnimalRepository|MockInterface
