@@ -96,6 +96,15 @@ abstract class AnimalsModuleUnitTestCase extends UnitTestCase
             ->andReturnNull();
     }
 
+    protected function shouldUpdate(Animal $animal): void
+    {
+        $this->repository()
+            ->shouldReceive('updateAnimal')
+            ->with($this->similarTo($animal))
+            ->once()
+            ->andReturnNull();
+    }
+
     protected function repository(): AnimalRepository|MockInterface
     {
         return $this->repository ??= $this->mock(AnimalRepository::class);
