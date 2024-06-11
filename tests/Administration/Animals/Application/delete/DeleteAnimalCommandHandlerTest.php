@@ -60,10 +60,7 @@ final class DeleteAnimalCommandHandlerTest extends AnimalsModuleUnitTestCase
             ->once()
             ->with($this->similarTo($animal->animalPhoto()));
 
-        $this->repository()
-            ->shouldReceive('delete')
-            ->once()
-            ->with($this->similarTo($animal));
+        $this->shouldDelete($animal);
 
         $this->dispatch($command, $this->handler);
     }
