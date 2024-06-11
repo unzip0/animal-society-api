@@ -9,7 +9,7 @@ use AnimalSociety\Shared\Infrastructure\Http\ApiController;
 use App\Http\Requests\BasicAuthRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-final class DeleteAnimalController extends ApiController
+final class AnimalsDeleteController extends ApiController
 {
     public function __invoke(BasicAuthRequest $request, string $animalId): Response
     {
