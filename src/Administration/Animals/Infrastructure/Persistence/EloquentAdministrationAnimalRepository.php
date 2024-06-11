@@ -53,6 +53,11 @@ final class EloquentAdministrationAnimalRepository extends EloquentRepository im
         return $this->findByCriteria($criteria);
     }
 
+    public function updateAnimal(Animal $animal): void
+    {
+        $this->update($animal);
+    }
+
     protected function model(): Model
     {
         return new ModelAnimal();

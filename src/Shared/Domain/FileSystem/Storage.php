@@ -11,4 +11,6 @@ interface Storage
     public function delete(UploadedFile $file): void;
 
     public function url(UploadedFile $file): ?string;
+
+    public function update(UploadedFile $file): void;
 }

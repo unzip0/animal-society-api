@@ -38,6 +38,12 @@ final class LocalFileStorage implements Storage
         $mediaCollection->each(fn ($media) => $media->delete());
     }
 
+    public function update(UploadedFile $file): void
+    {
+        $this->delete($file);
+        $this->store($file);
+    }
+
     public function url(UploadedFile $file): ?string
     {
         $modelName = $file->getMediaModelName();
