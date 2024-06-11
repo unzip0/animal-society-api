@@ -24,4 +24,6 @@ interface AnimalRepository
      * @param array<string,mixed> $criteria
      */
     public function findOneBy(array $criteria): ?Domain;
+
+    public function delete(Animal $animal): void;
 }

@@ -22,7 +22,7 @@ class BasicAuthRequest extends Request
     public function rules(): array
     {
         return [
-            'association_id' => 'string|required',
+            'association_id' => 'string',
         ];
     }
 

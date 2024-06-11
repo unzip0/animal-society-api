@@ -20,7 +20,7 @@ final class Animal extends AggregateRoot implements Domain
         private readonly AnimalSpeciesId $animalSpeciesId,
         private readonly AnimalRaceId $animalRaceId,
         private readonly AnimalAge $animalAge,
-        private readonly AnimalPhoto $animalPhoto,
+        private readonly ?AnimalPhoto $animalPhoto,
         private readonly bool $animalAvailable,
     ) {}
 
@@ -31,7 +31,7 @@ final class Animal extends AggregateRoot implements Domain
         AnimalSpeciesId $animalSpeciesId,
         AnimalRaceId $animalRaceId,
         AnimalAge $animalAge,
-        AnimalPhoto $animalPhoto,
+        ?AnimalPhoto $animalPhoto,
     ): self {
         $animal = new self(
             animalId: $animalId,
@@ -77,7 +77,7 @@ final class Animal extends AggregateRoot implements Domain
         return $this->animalAge;
     }
 
-    public function animalPhoto(): AnimalPhoto
+    public function animalPhoto(): ?AnimalPhoto
     {
         return $this->animalPhoto;
     }
