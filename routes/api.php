@@ -14,9 +14,11 @@ use App\Http\Controllers\Administration\Users\UsersLoginController;
 use App\Http\Controllers\Administration\Users\UsersLogoutController;
 use App\Http\Controllers\Administration\Users\UsersProfileController;
 use App\Http\Controllers\Administration\Users\UsersRegisterController;
+use App\Http\Controllers\Administration\Users\UsersSearchController;
 use App\Http\Controllers\Administration\Users\UsersUpdateController;
 use App\Http\Controllers\HealthCheck\HealthCheckGetController;
 use App\Http\Middleware\AllowedUserInAssociation;
+use App\Http\Middleware\SuperAdminUserAllowed;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -64,6 +66,13 @@ Route::prefix('v1')->group(function () {
             Route::get('profile', UsersProfileController::class);
             Route::post('logout', UsersLogoutController::class);
             Route::patch('{id}', UsersUpdateController::class);
+
+            Route::middleware(AllowedUserInAssociation::middlewareName())->group(function() {
+                
+                Route::middleware(SuperAdminUserAllowed::middlewareName())->group(function() {
+                    Route::get('all', UsersSearchController::class);
+                });
+            });
         });
 
         Route::prefix('animals')->group(function() {
