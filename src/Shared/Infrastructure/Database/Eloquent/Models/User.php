@@ -112,6 +112,7 @@ class User extends Model implements JWTSubject, AuthenticatableContract
     {
         return [
             'association_id' => $this->association->id(),
+            'role' => $this->role(),
         ];
     }
 }

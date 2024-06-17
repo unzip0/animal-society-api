@@ -25,6 +25,32 @@ final class UserRole extends StringValueObject
         $this->roleExists($value);
     }
 
+    public function isSuper(): bool
+    {
+        return $this->value === self::ROLE_SUPER;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->value === self::ROLE_ADMIN;
+    }
+
+    public function isSupport(): bool
+    {
+        return $this->value === self::ROLE_SUPPORT;
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function allowedAdminRoles(): array
+    {
+        return [
+            self::ROLE_SUPER,
+            self::ROLE_ADMIN,
+        ];
+    }
+
     private function roleExists(string $role): void
     {
         if (!in_array($role, self::USER_ROLES, true)) {
