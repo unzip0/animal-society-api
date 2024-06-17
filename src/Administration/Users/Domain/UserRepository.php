@@ -19,6 +19,12 @@ interface UserRepository
 
     /**
      * @param array<string,mixed> $criteria
+     * @return Domain[]
+     */
+    public function matchingByCriteria(array $criteria): array;
+
+    /**
+     * @param array<string,mixed> $criteria
      */
     public function findOneBy(array $criteria): ?Domain;
 

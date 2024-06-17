@@ -52,6 +52,15 @@ final class EloquentAdministrationUserRepository extends EloquentRepository impl
         return $this->findByCriteria([]);
     }
 
+    /**
+     * @param array<string,mixed> $criteria
+     * @return Domain[]
+     */
+    public function matchingByCriteria(array $criteria): array
+    {
+        return $this->findByCriteria($criteria);
+    }
+
     protected function model(): Model
     {
         return new ModelsUser();

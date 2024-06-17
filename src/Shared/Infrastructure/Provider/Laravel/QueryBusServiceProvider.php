@@ -12,6 +12,8 @@ use AnimalSociety\Administration\Animals\Application\search\GetAssociationAnimal
 use AnimalSociety\Administration\Animals\Application\search\GetAssociationAnimalsQueryHandler;
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQuery;
 use AnimalSociety\Administration\Associations\Application\findAll\FindAllAssociationsQueryHandler;
+use AnimalSociety\Administration\Users\Application\findAll\FindAllUsersQuery;
+use AnimalSociety\Administration\Users\Application\findAll\FindAllUsersQueryHandler;
 use AnimalSociety\Administration\Users\Application\login\LoginUserQuery;
 use AnimalSociety\Administration\Users\Application\login\LoginUserQueryHandler;
 use AnimalSociety\Shared\Domain\Bus\Query\QueryBus;
@@ -36,6 +38,7 @@ class QueryBusServiceProvider extends ServiceProvider
             GetAssociationAnimalsQuery::class => GetAssociationAnimalsQueryHandler::class,
             FindAllAnimalRacesQuery::class => FindAllAnimalRacesQueryHandler::class,
             FindAllAnimalSpeciesQuery::class => FindAllAnimalSpeciesQueryHandler::class,
+            FindAllUsersQuery::class => FindAllUsersQueryHandler::class,
         ];
     }
 }

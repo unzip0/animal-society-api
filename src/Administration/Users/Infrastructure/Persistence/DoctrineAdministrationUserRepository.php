@@ -49,6 +49,11 @@ final class DoctrineAdministrationUserRepository extends DoctrineRepository impl
         $this->persist($user);
     }
 
+    public function matchingByCriteria(array $criteria): array
+    {
+        return [];
+    }
+
     // /**
     //  * @return User[]
     //  */
