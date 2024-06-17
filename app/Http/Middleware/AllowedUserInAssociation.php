@@ -53,11 +53,11 @@ class AllowedUserInAssociation
         return self::MIDDLEWARE_NAME;
     }
 
-    private function getHeaderAssociationId(string $authorizationToken): string
+    private function getHeaderAssociationId(string $authorizationToken): ?string
     {
         $decodedToken = $this->jwtManager->decodeToken($authorizationToken);
 
-        return $decodedToken['association_id'] ?? '';
+        return $decodedToken['association_id'] ?? null;
     }
 
     private function validateAssociationUser(
