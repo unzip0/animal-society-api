@@ -1,0 +1,21 @@
+name: Deploy to AWS EC2
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the files
+        uses: actions/checkout@v4
+      - name: Deploy to AWS EC2
+        uses: easingthemes/ssh-deploy@main
+        with:
+          host: ${{ secrets.AWS_EC2_HOST }}
+          username: ${{ secrets.AWS_EC2_USERNAME }}
+          password: ${{ secrets.AWS_EC2_PASSWORD }}
+          source_path: .
+          target_path: /var/www/html/animal-society-api
