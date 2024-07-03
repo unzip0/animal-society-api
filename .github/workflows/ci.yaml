@@ -1,11 +1,6 @@
 name: CI WORKFLOW
 
 on:
-  push:
-    branches:
-      - master
-      - feature/*
-      - task/*
   pull_request:
 
 jobs:
