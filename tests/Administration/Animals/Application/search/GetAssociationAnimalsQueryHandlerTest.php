@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace AnimalSociety\Tests\Administration\Animals\Application\search;
 
-use AnimalSociety\Administration\Animals\Application\AnimalsResponse;
 use AnimalSociety\Administration\Animals\Application\search\AnimalSearcher;
 use AnimalSociety\Administration\Animals\Application\search\GetAssociationAnimalsQueryHandler;
 use AnimalSociety\Tests\Administration\Animals\AnimalPhotos\Domain\AnimalPhotoFileExtensionMother;
@@ -36,7 +35,6 @@ final class GetAssociationAnimalsQueryHandlerTest extends AnimalsModuleUnitTestC
 
     public function testItShouldGetAssociationAnimals(): void
     {
-        $this->markTestSkipped('TODO');
         $query = GetAssociationAnimalsQueryMother::create();
         $association = AssociationMother::create();
         $animalSpecies = AnimalSpeciesMother::create();
@@ -64,8 +62,10 @@ final class GetAssociationAnimalsQueryHandlerTest extends AnimalsModuleUnitTestC
             available: $animal->isAvailable()
         );
 
-        $response = new AnimalsResponse($animalResponse);
-        $this->shouldReturnItemsInArray($animal);
+        $response = AnimalsResponseMother::create(
+            $animalResponse
+        );
+        $this->shouldMatchByCriteria($animal);
 
         $this->assertAskResponse($response, $query, $this->handler);
     }

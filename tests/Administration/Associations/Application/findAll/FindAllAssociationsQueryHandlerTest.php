@@ -27,12 +27,11 @@ final class FindAllAssociationsQueryHandlerTest extends AssociationsModuleUnitTe
 
     public function testItShouldReturnAllAssociations(): void
     {
-        $this->markTestSkipped('TODO');
         $query = FindAllAssociationsQueryMother::create();
         $association = AssociationMother::create();
         $response = AssociationsResponseMother::create($association);
 
-        $this->shouldReturnItemsInArray($association);
+        $this->shouldFindAll($association);
 
         $this->assertAskResponse($response, $query, $this->handler);
     }

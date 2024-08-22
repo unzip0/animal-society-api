@@ -57,14 +57,14 @@ abstract class UsersModuleUnitTestCase extends UnitTestCase
             ->andReturn([]);
     }
 
-    protected function shouldReturnItemsInArray(array $criteria, User $user): void
+    protected function shouldMatchByCriteria(array $criteria, User $user): void
     {
         $this->repository()
             ->shouldReceive('matchingByCriteria')
             ->with($criteria)
             ->once()
             ->andReturn(
-                [$this->similarTo($user->toArray())]
+                [$user]
             );
     }
 
