@@ -57,13 +57,13 @@ abstract class AssociationsModuleUnitTestCase extends UnitTestCase
             ->andReturn([]);
     }
 
-    protected function shouldReturnItemsInArray(Association $association): void
+    protected function shouldFindAll(Association $association): void
     {
         $this->repository()
             ->shouldReceive('findAll')
             ->once()
             ->andReturn(
-                [$this->similarTo($association->toArray())]
+                [$association]
             );
     }
 

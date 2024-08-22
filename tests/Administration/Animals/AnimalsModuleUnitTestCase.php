@@ -76,14 +76,14 @@ abstract class AnimalsModuleUnitTestCase extends UnitTestCase
             ->andReturn([]);
     }
 
-    protected function shouldReturnItemsInArray(Animal $animal): void
+    protected function shouldMatchByCriteria(Animal $animal): void
     {
         $this->repository()
             ->shouldReceive('matchingByCriteria')
             ->withAnyArgs()
             ->once()
             ->andReturn(
-                [$this->similarTo($animal->toArray())]
+                [$animal]
             );
     }
 

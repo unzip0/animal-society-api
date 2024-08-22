@@ -28,13 +28,12 @@ final class FindAllUsersQueryHandlerTest extends UsersModuleUnitTestCase
 
     public function testItShouldReturnAllUsers(): void
     {
-        $this->markTestSkipped('TODO');
         $associationId = UuidMother::create();
         $query = FindAllUsersQueryMother::create($associationId);
         $user = UserMother::create();
         $response = UsersResponseMother::create($user);
 
-        $this->shouldReturnItemsInArray([
+        $this->shouldMatchByCriteria([
             'association_id' => $associationId,
         ], $user);
 
